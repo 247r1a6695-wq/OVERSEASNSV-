@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NSV Overseas - Your Trusted Global Education Partner. Expert study abroad counselling, university admissions, education loans, and visa support for Indian students.">
+    <meta name="keywords" content="Study Abroad, Global Education, Universities, Education Loans, Visa Guidance, India, Consultancy, NSV Overseas">
+    <meta name="author" content="NSV Overseas">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="NSV Overseas - Study Abroad Consultancy">
+    <meta property="og:description" content="Expert guidance for study abroad. Trusted by Indian students globally.">
+    <meta property="og:type" content="website">
+    <title>NSV Overseas - Your Trusted Global Education Partner | Study Abroad Consultancy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Announcement Banner -->
+    <div class="announcement-banner" id="announcementBanner">
+        <div class="announcement-content">
+            <i class="fas fa-bullhorn"></i>
+            <span>Refer & Earn up to ₹50,000 for every successful student abroad journey referral!</span>
+            <div class="announcement-buttons">
+                <button class="btn btn-sm btn-gold" onclick="window.location.href='referral.html'">Start Earning</button>
+                <button class="btn btn-sm btn-primary btn-highlight" onclick="window.location.href='referral.html'">Join Referral Program</button>
+            </div>
+        </div>
+        <button class="announcement-close" onclick="closeAnnouncement()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" width="50" height="50" preserveAspectRatio="xMidYMid meet">
+                            <!-- MORTARBOARD (Navy blue stretched triangle/polygon) -->
+                            <polygon points="150,320 500,120 850,320 500,420" fill="#1a3d5c"/>
+                            
+                            <!-- CAP BAND (Navy darker section) -->
+                            <ellipse cx="500" cy="420" rx="380" ry="100" fill="#1a3d5c"/>
+                            
+                            <!-- CAP BAND HIGHLIGHT/BORDER (White curved line) -->
+                            <ellipse cx="500" cy="450" rx="380" ry="80" fill="none" stroke="white" stroke-width="16"/>
+                            
+                            <!-- TASSEL STRING (Navy curved line from left) -->
+                            <path d="M 150 320 Q 100 380 90 550" stroke="#1a3d5c" stroke-width="18" fill="none" stroke-linecap="round"/>
+                            
+                            <!-- TASSEL BALL (Navy circle) -->
+                            <circle cx="90" cy="610" r="38" fill="#1a3d5c"/>
+                            
+                            <!-- WHITE AIRPLANE (Top center of mortarboard) -->
+                            <!-- Main body -->
+                            <ellipse cx="620" cy="240" rx="100" ry="50" fill="white"/>
+                            
+                            <!-- Nose -->
+                            <polygon points="720,240 820,240 770,190 770,290" fill="white"/>
+                            
+                            <!-- Left wing -->
+                            <polygon points="585,210 450,80 545,360" fill="white"/>
+                            
+                            <!-- Right wing -->
+                            <polygon points="655,210 790,80 695,360" fill="white"/>
+                            
+                            <!-- Tail -->
+                            <polygon points="540,235 410,110 500,350" fill="white"/>
+                            
+                            <!-- Cockpit/window -->
+                            <circle cx="630" cy="240" r="20" fill="#1a3d5c"/>
+                            
+                            <!-- MOTION LINES (White diagonal lines behind airplane) -->
+                            <!-- Line 1 (top) -->
+                            <line x1="820" y1="160" x2="950" y2="30" stroke="white" stroke-width="28" stroke-linecap="round"/>
+                            
+                            <!-- Line 2 (middle) -->
+                            <line x1="830" y1="240" x2="970" y2="120" stroke="white" stroke-width="26" stroke-linecap="round"/>
+                            
+                            <!-- Line 3 (bottom) -->
+                            <line x1="830" y1="310" x2="970" y2="190" stroke="white" stroke-width="24" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <div class="nav-dropdown">
+                        <button class="nav-link dropdown-toggle">Countries <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-search">
+                                <input type="text" id="countrySearch" placeholder="Search countries..." class="search-input">
+                            </div>
+                            <div class="dropdown-content">
+                                <div class="dropdown-category">
+                                    <h4>Countries</h4>
+                                    <a href="country-detail.html?country=Australia" class="dropdown-item">🇦🇺 Australia</a>
+                                    <a href="country-detail.html?country=USA" class="dropdown-item">🇺🇸 USA</a>
+                                    <a href="country-detail.html?country=UK" class="dropdown-item">🇬🇧 UK</a>
+                                    <a href="country-detail.html?country=Canada" class="dropdown-item">🇨🇦 Canada</a>
+                                    <a href="country-detail.html?country=Germany" class="dropdown-item">🇩🇪 Germany</a>
+                                    <a href="country-detail.html?country=Netherlands" class="dropdown-item">🇳🇱 Netherlands</a>
+                                    <a href="country-detail.html?country=Finland" class="dropdown-item">🇫🇮 Finland</a>
+                                    <a href="country-detail.html?country=France" class="dropdown-item">🇫🇷 France</a>
+                                    <a href="country-detail.html?country=Ireland" class="dropdown-item">🇮🇪 Ireland</a>
+                                    <a href="country-detail.html?country=Italy" class="dropdown-item">🇮🇹 Italy</a>
+                                    <a href="country-detail.html?country=New Zealand" class="dropdown-item">🇳🇿 New Zealand</a>
+                                    <a href="country-detail.html?country=Sweden" class="dropdown-item">🇸🇪 Sweden</a>
+                                    <a href="country-detail.html?country=Poland" class="dropdown-item">🇵🇱 Poland</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#courses" class="nav-link">Courses</a>
+                    <a href="#education-loans" class="nav-link">Education Loans</a>
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                    <a href="referral.html" class="nav-link">Referrals</a>
+                    <a href="#contact" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="nav-link">Login / Register</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Make Your Study Abroad Dreams Come True</h1>
+            <p class="hero-subtitle">Expert counselling, trusted universities, education loans, visa support, and complete end-to-end assistance.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>450+</h3>
+                    <p>Partner Universities Worldwide</p>
+                </div>
+                <div class="stat">
+                    <h3>98%</h3>
+                    <p>Visa Success Rate</p>
+                </div>
+                <div class="stat">
+                    <h3>20+</h3>
+                    <p>Countries</p>
+                </div>
+            </div>
+            <button class="btn btn-lg btn-primary" onclick="scrollToSection('services')">View Services</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">What NSV Overseas Does</h2>
+            <div class="services-list">
+                <div class="service-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>University & Country Selection</h3>
+                    <p>Expert guidance in selecting the right universities and countries based on your profile and career goals</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-compass"></i>
+                    <h3>Study Abroad Guidance</h3>
+                    <p>Comprehensive counselling for study abroad planning, application process, and career planning</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Admissions Support</h3>
+                    <p>Complete admissions assistance including application preparation, document submission, and follow-ups</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-edit"></i>
+                    <h3>SOP & Documentation</h3>
+                    <p>Professional SOP writing, LOR assistance, and complete documentation support for applications</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-passport"></i>
+                    <h3>Visa Guidance & Interview Preparation</h3>
+                    <p>Comprehensive visa assistance, interview preparation, and embassy application support</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Education Loans Assistance</h3>
+                    <p>Help securing education loans with competitive rates from trusted financial partners</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Scholarship Assistance</h3>
+                    <p>Guidance on available scholarships, merit-based awards, and financial aid opportunities</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Career & Course Counselling</h3>
+                    <p>Personalized career counselling and course selection based on your interests and market trends</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-plane"></i>
+                    <h3>Pre-Departure Briefing</h3>
+                    <p>Comprehensive pre-departure guidance and post-landing support for smooth transition abroad</p>
+                </div>
+            </div>
+
+            <div class="key-features">
+                <h2 class="section-title">Key Features of NSV Overseas</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <i class="fas fa-star"></i>
+                        <h4>Student-Centric & Transparent</h4>
+                        <p>Process focused on student needs with complete transparency</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-rocket"></i>
+                        <h4>High Visa Success Rate</h4>
+                        <p>98% visa success rate with proven track record</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Global University Partnerships</h4>
+                        <p>Trusted partnerships with universities worldwide</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Dedicated Counsellors</h4>
+                        <p>Each student gets a dedicated counsellor for personalized support</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-compass"></i>
+                        <h4>End-to-End Support</h4>
+                        <p>From counselling to abroad settlement, we're with you</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-cogs"></i>
+                        <h4>Process Driven Approach</h4>
+                        <p>Structured, systematic process ensuring nothing is missed in your application</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">Courses You Can Join Through Us</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Engineering</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Computer Science & IT</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Data Science & AI</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>MBA / Management</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Masters</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>MTech</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Health & Life Sciences</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Hospitality & Tourism</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Finance & Accounting</h3>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Arts & Design</h3>
+                </div>
+            </div>
+            <div class="courses-footer">
+                <p>And many more courses available based on your career goals and interests.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Loan Partners -->
+    <section class="loan-partners" id="education-loans">
+        <div class="container">
+            <h2 class="section-title">Trusted Education Loan Partners</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #00a8e8, #0088cc); color: white;">AV</span>
+                    </div>
+                    <p>Avanse</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #0066cc, #0052a3); color: white;">HD</span>
+                    </div>
+                    <p>HDFC Bank</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white;">NM</span>
+                    </div>
+                    <p>Nomad</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #f39c12, #d68910); color: white;">PF</span>
+                    </div>
+                    <p>Poonawalla Finance</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #8b4513, #6b3410); color: white;">PSB</span>
+                    </div>
+                    <p>Punjab & Sind Bank</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #1a365d, #0f1f3a); color: white;">SBI</span>
+                    </div>
+                    <p>SBI</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #27ae60, #1e8449); color: white;">TC</span>
+                    </div>
+                    <p>Tata Capital</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #2c3e50, #1a252f); color: white;">UB</span>
+                    </div>
+                    <p>Union Bank</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #d4af37, #c39a1e); color: #1a365d;">CB</span>
+                    </div>
+                    <p>Canara Bank</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #c0392b, #a93226); color: white;">BB</span>
+                    </div>
+                    <p>Bank of Baroda</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #34495e, #2c3e50); color: white;">AB</span>
+                    </div>
+                    <p>Axis Bank</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <span class="bank-text" style="background: linear-gradient(135deg, #16a085, #117a65); color: white;">ICICI</span>
+                    </div>
+                    <p>ICICI Bank</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch With Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Details</h3>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <p>Email</p>
+                            <a href="mailto:overseasnsv@gmail.com">overseasnsv@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <p>Phone</p>
+                            <a href="tel:9885885847">9885885847</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <p>Address</p>
+                            <p>27-16-31/2A, Sri Krishna Nagar Colony,<br>Neredmet, Secunderabad – 500056, Telangana</p>
+                        </div>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/919885885847" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Chat
+                        </a>
+                        <a href="tel:9885885847" class="btn btn-call">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm" onsubmit="handleContactForm(event)">
+                    <h3>Send Inquiry</h3>
+                    <div class="form-group">
+                        <input type="text" id="contactName" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="contactEmail" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="contactPhone" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="contactMessage" placeholder="Your Message / Inquiry" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                    <p>Making study abroad accessible and successful for every aspiring student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="referral.html">Referrals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Free Counselling Modal -->
+    <div class="modal" id="counsellingModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('counsellingModal').style.display='none'">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Free Counselling Session</h2>
+            <form onsubmit="handleCounsellingForm(event)">
+                <div class="form-group">
+                    <input type="text" id="counselName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="counselEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="counselPhone" placeholder="Your Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select id="counselInterest" required>
+                        <option value="">Select Your Interest</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="CS/IT">Computer Science & IT</option>
+                        <option value="Data Science">Data Science & AI</option>
+                        <option value="MBA">MBA / Management</option>
+                        <option value="Healthcare">Health & Life Sciences</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Free Session</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

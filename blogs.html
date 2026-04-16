@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NSV Overseas Blog - Study Abroad Tips, Visa Guidance, University Information, and Expert Advice">
+    <meta name="keywords" content="Study Abroad Blog, Visa Tips, University Guide, Student Stories, Education Blog">
+    <meta name="author" content="NSV Overseas">
+    <title>Blog - NSV Overseas | Study Abroad Guide & Tips</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="logo.svg" alt="NSV Overseas Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#about" class="nav-link">About Us</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#courses" class="nav-link">Courses</a>
+                    <a href="index.html#education-loans" class="nav-link">Education Loans</a>
+                    <a href="blogs.html" class="nav-link active">Blogs</a>
+                    <a href="referral.html" class="nav-link">Referrals</a>
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </nav>
+
+                <button class="btn btn-primary" onclick="document.getElementById('counsellingModal').style.display='flex'">Free Counselling</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Referral Banner/Popup at Top -->
+    <div class="referral-banner" id="referralBanner">
+        <div class="referral-banner-content">
+            <div class="referral-banner-left">
+                <i class="fas fa-gift"></i>
+                <div class="referral-banner-text">
+                    <h3>Earn Money While Reading! 💰</h3>
+                    <p>Refer a friend and earn up to <strong>₹50,000</strong> for every successful student abroad journey!</p>
+                </div>
+            </div>
+            <div class="referral-banner-actions">
+                <a href="referral.html" class="btn btn-gold" style="margin-right: 10px;">
+                    <i class="fas fa-arrow-right"></i> Join Referral Program
+                </a>
+                <button class="referral-banner-close" onclick="closeReferralBanner()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="blogs-hero">
+        <div class="container">
+            <h1 class="hero-title">Study Abroad Blog</h1>
+            <p class="hero-subtitle">Expert tips, student stories, and valuable insights to guide your study abroad journey</p>
+        </div>
+    </section>
+
+    <!-- Blogs Section (with conditional display) -->
+    <section class="blogs-section" id="blogs-section">
+        <div class="container">
+            <div class="blogs-header">
+                <h2 class="section-title">Latest Articles</h2>
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div class="blog-filters">
+                        <button class="filter-btn active" data-filter="all">All Articles</button>
+                        <button class="filter-btn" data-filter="visa">Visa</button>
+                        <button class="filter-btn" data-filter="universities">Universities</button>
+                        <button class="filter-btn" data-filter="scholarships">Scholarships</button>
+                        <button class="filter-btn" data-filter="tips">Tips & Tricks</button>
+                    </div>
+                    <button id="addBlogBtn" class="btn btn-gold" style="display: none; gap: 8px;">
+                        <i class="fas fa-plus"></i> Add New Blog
+                    </button>
+                </div>
+            </div>
+
+            <div class="blog-search">
+                <input type="text" id="blogSearchInput" placeholder="Search articles..." class="search-input">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div id="blogsList" class="blogs-grid"></div>
+
+            <div id="noBlogsMessage" class="no-content" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h3>No Articles Yet</h3>
+                <p>Check back soon for expert insights on study abroad, visa guidance, and university information!</p>
+                <a href="index.html#contact" class="btn btn-primary">Get Free Counselling</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="blogs-cta">
+        <div class="container">
+            <h2>Need Personalized Guidance?</h2>
+            <p>Our expert counsellors are ready to help you with your study abroad journey</p>
+            <button class="btn btn-lg btn-primary" onclick="document.getElementById('counsellingModal').style.display='flex'">
+                <i class="fas fa-calendar-check"></i> Book Free Counselling
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="referral.html">Referrals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Free Counselling Modal -->
+    <div class="modal" id="counsellingModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('counsellingModal').style.display='none'">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Free Counselling Session</h2>
+            <form onsubmit="handleCounsellingForm(event)">
+                <div class="form-group">
+                    <input type="text" id="counselName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="counselEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="counselPhone" placeholder="Your Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select id="counselInterest" required>
+                        <option value="">Select Your Interest</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="CS/IT">Computer Science & IT</option>
+                        <option value="Data Science">Data Science & AI</option>
+                        <option value="MBA">MBA / Management</option>
+                        <option value="Healthcare">Health & Life Sciences</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Free Session</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <style>
+        /* ==================== BLOGS PAGE SPECIFIC STYLES ==================== */
+        
+        .blogs-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f1f3a 100%);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .blogs-hero .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            font-family: var(--font-primary);
+        }
+
+        .blogs-hero .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Blogs Section */
+        .blogs-section {
+            padding: var(--spacing-3xl) 0;
+            background: var(--white);
+        }
+
+        .blogs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+            flex-wrap: wrap;
+        }
+
+        .blogs-header .section-title {
+            margin-bottom: 0;
+        }
+
+        .blog-filters {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--white);
+            color: var(--text-color);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-speed);
+            font-family: var(--font-primary);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .filter-btn.active {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* Search */
+        .blog-search {
+            position: relative;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .blog-search .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-family: var(--font-secondary);
+            font-size: 0.95rem;
+            transition: all var(--transition-speed);
+        }
+
+        .blog-search .search-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .blog-search i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-gray);
+        }
+
+        /* Blogs Grid */
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .blog-card {
+            background: var(--light-gray);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .blog-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform var(--transition-speed);
+        }
+
+        .blog-card:hover .blog-thumbnail {
+            transform: scale(1.05);
+        }
+
+        /* Admin Action Buttons on Blog Card */
+        .blog-admin-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .admin-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .edit-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #0f2844;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        .blog-content {
+            padding: var(--spacing-lg);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-content h3 {
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.4;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-category {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .blog-date {
+            color: var(--dark-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .blog-description {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            margin-bottom: var(--spacing-md);
+            flex: 1;
+        }
+
+        .read-more {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed);
+            align-self: flex-start;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* No Content */
+        .no-content {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--dark-gray);
+        }
+
+        .no-content i {
+            font-size: 4rem;
+            color: var(--border-color);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .no-content h3 {
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .no-content p {
+            margin-bottom: var(--spacing-xl);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .blogs-cta {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f1f3a 100%);
+            color: var(--white);
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+        }
+
+        .blogs-cta h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            font-family: var(--font-primary);
+        }
+
+        .blogs-cta p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blogs-hero .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .blogs-header {
+                flex-direction: column;
+            }
+
+            .blog-filters {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .blogs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .blogs-cta h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blogs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-filters {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .referral-banner-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .referral-banner-left {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .referral-banner-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .referral-banner-actions .btn {
+                width: 100%;
+            }
+        }
+
+        /* ==================== REFERRAL BANNER STYLES ==================== */
+        
+        .referral-banner {
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a8c 50%, #d4af37 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .referral-banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .referral-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .referral-banner-left i {
+            font-size: 2.5rem;
+            color: #d4af37;
+        }
+
+        .referral-banner-text h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: var(--font-primary);
+        }
+
+        .referral-banner-text p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .referral-banner-text strong {
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        .referral-banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .btn.btn-gold {
+            background: #d4af37;
+            color: #1a365d;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn.btn-gold:hover {
+            background: #e6c75f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        .referral-banner-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .referral-banner-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .referral-banner-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .referral-banner-left {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+            }
+
+            .referral-banner-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .referral-banner-actions .btn {
+                width: 100%;
+            }
+
+            .referral-banner-close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        // Load and display blogs
+        function loadBlogsPage() {
+            const blogs = getPublishedBlogs();
+            const blogsGrid = document.getElementById('blogsList');
+            const noBlogsMessage = document.getElementById('noBlogsMessage');
+            const blogsSection = document.getElementById('blogs-section');
+
+            if (blogs.length === 0) {
+                // Hide blogs section if no published blogs
+                blogsSection.style.display = 'none';
+                return;
+            }
+
+            // Display blogs
+            displayBlogsOnPage(blogs);
+        }
+
+        function displayBlogsOnPage(blogs) {
+            const blogsGrid = document.getElementById('blogsList');
+            const isAdmin = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).role === 'admin' : false;
+            
+            const html = blogs.map(blog => `
+                <div class="blog-card" data-topic="${blog.topic}">
+                    ${blog.thumbnail ? `<img src="${blog.thumbnail}" alt="${blog.altText || blog.title}" class="blog-thumbnail">` : '<div style="width: 100%; height: 200px; background: var(--light-gray); display: flex; align-items: center; justify-content: center;"><i class="fas fa-image" style="font-size: 3rem; color: var(--border-color);"></i></div>'}
+                    ${isAdmin ? `
+                        <div class="blog-admin-actions">
+                            <button class="admin-btn edit-btn" onclick="editBlog(${blog.id})" title="Edit Blog">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="admin-btn delete-btn" onclick="deleteBlogFromList(${blog.id})" title="Delete Blog">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    ` : ''}
+                    <div class="blog-content">
+                        <h3>${blog.title}</h3>
+                        <div class="blog-meta">
+                            <span class="blog-category">${blog.topic}</span>
+                            <span class="blog-date"><i class="fas fa-calendar"></i> ${new Date(blog.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <p class="blog-description">${blog.metaDescription}</p>
+                        <a href="blog-detail.html?slug=${blog.slug}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            `).join('');
+
+            blogsGrid.innerHTML = html;
+        }
+
+        // Edit blog - redirect to admin panel
+        function editBlog(blogId) {
+            localStorage.setItem('editBlogId', blogId);
+            window.location.href = 'admin-panel.html#blogs';
+        }
+
+        // Delete blog from list
+        function deleteBlogFromList(blogId) {
+            if (confirm('Are you sure you want to delete this blog? This action cannot be undone.')) {
+                const blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+                const updatedBlogs = blogs.filter(b => b.id !== blogId);
+                localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
+                showNotification('Blog deleted successfully!', 'success');
+                loadBlogsPage();
+            }
+        }
+
+        // Filter blogs
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                const blogs = getPublishedBlogs();
+                let filtered = blogs;
+
+                if (filter !== 'all') {
+                    filtered = blogs.filter(b => b.topic.toLowerCase().includes(filter.toLowerCase()));
+                }
+
+                displayBlogsOnPage(filtered);
+            });
+        });
+
+        // Search blogs
+        document.getElementById('blogSearchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const blogs = getPublishedBlogs();
+            const filtered = blogs.filter(b =>
+                b.title.toLowerCase().includes(searchTerm) ||
+                b.metaDescription.toLowerCase().includes(searchTerm) ||
+                b.topic.toLowerCase().includes(searchTerm)
+            );
+
+            displayBlogsOnPage(filtered);
+        });
+
+        // Load on page load
+        loadBlogsPage();
+
+        // ==================== ADMIN BLOG CONTROLS ====================
+        
+        // Initialize admin controls
+        function initializeAdminControls() {
+            const user = localStorage.getItem('currentUser');
+            const isAdmin = user ? JSON.parse(user).role === 'admin' : false;
+            const addBlogBtn = document.getElementById('addBlogBtn');
+            
+            if (isAdmin && addBlogBtn) {
+                addBlogBtn.style.display = 'inline-flex';
+                addBlogBtn.addEventListener('click', () => {
+                    localStorage.removeItem('editBlogId');
+                    window.location.href = 'admin-panel.html#blogs';
+                });
+            }
+        }
+
+        // Call on page load
+        window.addEventListener('load', initializeAdminControls);
+
+        // ==================== REFERRAL BANNER FUNCTIONALITY ====================
+        
+        // Close referral banner
+        function closeReferralBanner() {
+            const banner = document.getElementById('referralBanner');
+            if (banner) {
+                // Add fade-out animation
+                banner.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => {
+                    banner.style.display = 'none';
+                    // Store in localStorage so it doesn't reappear for 24 hours
+                    localStorage.setItem('referralBannerClosed', new Date().getTime());
+                }, 300);
+            }
+        }
+
+        // Check if banner should be shown
+        function shouldShowReferralBanner() {
+            const closed = localStorage.getItem('referralBannerClosed');
+            if (!closed) return true;
+            
+            const closedTime = parseInt(closed);
+            const now = new Date().getTime();
+            const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+            
+            return (now - closedTime) > twentyFourHours;
+        }
+
+        // Initialize banner on page load
+        window.addEventListener('load', () => {
+            const banner = document.getElementById('referralBanner');
+            if (banner && !shouldShowReferralBanner()) {
+                banner.style.display = 'none';
+            }
+        });
+
+        // Add slide-up animation keyframe dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

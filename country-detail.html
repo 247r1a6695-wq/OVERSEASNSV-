@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore universities and colleges in various countries through NSV Overseas">
+    <title>Universities - Country Details | NSV Overseas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .country-hero {
+            background: linear-gradient(135deg, #1a365d 0%, #d4af37 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .country-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .country-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .colleges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .college-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .college-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
+            border-color: #d4af37;
+        }
+
+        .college-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #1a365d 0%, #d4af37 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            overflow: hidden;
+        }
+
+        .college-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .college-info {
+            padding: 25px;
+        }
+
+        .college-ranking {
+            display: inline-block;
+            background: #d4af37;
+            color: #1a365d;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .college-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 8px;
+        }
+
+        .college-city {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .college-description {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+
+        .college-programs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .program-tag {
+            background: #f0f0f0;
+            color: #1a365d;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .college-fee {
+            background: #f9f9f9;
+            border-left: 4px solid #d4af37;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .fee-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .fee-value {
+            font-size: 1rem;
+            color: #1a365d;
+            font-weight: 700;
+        }
+
+        .view-details-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a8c 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-details-btn:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #e6c75f 100%);
+            color: #1a365d;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #1a365d;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #d4af37;
+            color: #1a365d;
+        }
+
+        .colleges-container {
+            padding: 50px 0;
+        }
+
+        .no-colleges {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+        }
+
+        .no-colleges i {
+            font-size: 4rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .no-colleges h3 {
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+
+        .no-colleges p {
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .country-hero h1 {
+                font-size: 2rem;
+            }
+
+            .colleges-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="logo.svg" alt="NSV Overseas Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#courses" class="nav-link">Courses</a>
+                    <a href="index.html#education-loans" class="nav-link">Education Loans</a>
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                    <a href="referral.html" class="nav-link">Referrals</a>
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="nav-link">Login / Register</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Country Hero Section -->
+    <section class="country-hero">
+        <h1 id="countryName">Country</h1>
+        <p>Explore universities and colleges</p>
+    </section>
+
+    <!-- Colleges Section -->
+    <section class="colleges-container">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <h2 class="section-title">Top Universities in <span id="countryNameInTitle">this Country</span></h2>
+            
+            <div id="collegesContent">
+                <div class="colleges-grid" id="collegesGrid">
+                    <!-- Colleges will be populated here by JavaScript -->
+                </div>
+            </div>
+
+            <div id="noCollegesMessage" class="no-colleges" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No Colleges Found</h3>
+                <p>We're currently gathering data for this country. Please check back soon or contact us for more information.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                    <p>Making study abroad accessible and successful for every aspiring student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="referral.html">Referrals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        // Get country from URL parameter
+        function getCountryFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('country') || 'Australia';
+        }
+
+        // Display colleges for selected country
+        function displayColleges() {
+            const country = getCountryFromURL();
+            const colleges = getCollegesForCountry(country);
+
+            // Update title
+            document.getElementById('countryName').textContent = country;
+            document.getElementById('countryNameInTitle').textContent = country;
+
+            // Get grid and message elements
+            const grid = document.getElementById('collegesGrid');
+            const noMessage = document.getElementById('noCollegesMessage');
+
+            if (colleges.length === 0) {
+                grid.style.display = 'none';
+                noMessage.style.display = 'block';
+                return;
+            }
+
+            // Clear grid
+            grid.innerHTML = '';
+
+            // Populate colleges
+            colleges.forEach(college => {
+                const card = document.createElement('div');
+                card.className = 'college-card';
+                card.innerHTML = `
+                    <div class="college-image">
+                        <img src="${college.image}" alt="${college.name}" onerror="this.parentElement.innerHTML='<i class=\"fas fa-university\"></i>'">
+                    </div>
+                    <div class="college-info">
+                        <span class="college-ranking">📊 ${college.ranking}</span>
+                        <h3 class="college-name">${college.name}</h3>
+                        <div class="college-city">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${college.city}, ${college.country}
+                        </div>
+                        <p class="college-description">${college.description}</p>
+                        <div class="college-programs">
+                            ${college.programs.slice(0, 3).map(prog => `<span class="program-tag">${prog}</span>`).join('')}
+                        </div>
+                        <div class="college-fee">
+                            <div class="fee-label">Tuition Fee</div>
+                            <div class="fee-value">${college.tuitionFee}</div>
+                        </div>
+                        <button class="view-details-btn" onclick="viewCollegeDetails('${college.id}')">
+                            <i class="fas fa-arrow-right"></i> View Full Details
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // View college details
+        function viewCollegeDetails(collegeId) {
+            window.location.href = `college-detail.html?college=${collegeId}`;
+        }
+
+        // Setup mobile menu toggle
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+            const menu = document.getElementById('navbarMenu');
+            menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Initialize on page load
+        window.addEventListener('load', displayColleges);
+    </script>
+</body>
+</html>

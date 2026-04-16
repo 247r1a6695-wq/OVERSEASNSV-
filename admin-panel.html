@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NSV Overseas Admin Panel - Manage Blogs">
+    <meta name="keywords" content="Admin Panel, Blog Management, NSV Overseas">
+    <meta name="author" content="NSV Overseas">
+    <title>Admin Panel - NSV Overseas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Admin Access Control -->
+    <script>
+        // Check if user is admin on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('currentUser');
+            if (!user) {
+                showNotification('Access Denied: Please login as admin first!', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+                return;
+            }
+            
+            const currentUser = JSON.parse(user);
+            if (currentUser.role !== 'admin') {
+                showNotification('Access Denied: Admin privileges required!', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+                return;
+            }
+        });
+    </script>
+
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="logo.svg" alt="Logo" style="width: 40px; height: 40px;">
+                <h2>NSV Admin</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-section="blogs">
+                    <i class="fas fa-blog"></i> Manage Blogs
+                </a>
+                <a href="#" class="nav-item" data-section="inquiries">
+                    <i class="fas fa-envelope"></i> Inquiries
+                </a>
+                <a href="#" class="nav-item" data-section="referrals">
+                    <i class="fas fa-link"></i> Referrals
+                </a>
+                <a href="#" class="nav-item" data-section="counseling">
+                    <i class="fas fa-calendar-check"></i> Counseling Requests
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="blogs.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fas fa-eye"></i> View Public Blogs
+                </a>
+                <button class="btn btn-secondary" onclick="logout()" style="width: 100%;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="admin-header-left">
+                    <h1>Admin Dashboard</h1>
+                    <p id="welcomeMessage" style="color: #666; margin-top: 5px; font-size: 0.95rem;"></p>
+                </div>
+                <div class="admin-user">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="admin-user-info">
+                        <span id="adminName">Admin User</span>
+                        <small id="adminRole" style="display: block; color: #888; font-size: 0.85rem;">Admin</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-container">
+                <!-- Dashboard Section -->
+                <section class="admin-section active" data-section="dashboard">
+                    <div style="background: linear-gradient(135deg, #1a365d 0%, #2d5a8c 100%); color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h2 style="color: white; margin-bottom: 1rem;">👋 Welcome to NSV Admin Dashboard</h2>
+                        <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                            You have full control over blog content management. Use the advanced SEO optimization tools to create high-quality content that ranks well in search engines.
+                        </p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong style="display: block; margin-bottom: 0.5rem;">📝 Create Blogs</strong>
+                                <small>Use advanced 3-tab form with SEO tools</small>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong style="display: block; margin-bottom: 0.5rem;">🔍 SEO Optimization</strong>
+                                <small>Meta tags, keywords, schema markup</small>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong style="display: block; margin-bottom: 0.5rem;">📊 Real-time Scoring</strong>
+                                <small>Get instant SEO quality feedback</small>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                                <strong style="display: block; margin-bottom: 0.5rem;">🌐 Public Access</strong>
+                                <small>Published blogs visible to everyone</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blogs">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>Total Blogs</h3>
+                            <p class="stat-number" id="totalBlogs">0</p>
+                            <small>Published & Drafts</small>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon inquiries">
+                                <i class="fas fa-inbox"></i>
+                            </div>
+                            <h3>Inquiries</h3>
+                            <p class="stat-number" id="totalInquiries">0</p>
+                            <small>Student Inquiries</small>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon referrals">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <h3>Referrals</h3>
+                            <p class="stat-number" id="totalReferrals">0</p>
+                            <small>Active Referrals</small>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon counseling">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h3>Counseling Requests</h3>
+                            <p class="stat-number" id="totalCounseling">0</p>
+                            <small>Pending Requests</small>
+                        </div>
+                    </div>
+
+                    <div class="recent-section">
+                        <h3>Recent Activity</h3>
+                        <div id="recentActivity" class="activity-list"></div>
+                    </div>
+                </section>
+
+                <!-- Blogs Section -->
+                <section class="admin-section" data-section="blogs">
+                    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f7 100%); padding: 1.5rem; border-radius: 10px; border-left: 5px solid #1a365d;">
+                        <div>
+                            <h2 style="margin: 0 0 0.5rem 0;">📝 Manage & Create Blogs</h2>
+                            <p style="margin: 0; color: #666; font-size: 0.95rem;">Create, edit, and publish blog posts with advanced SEO optimization</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openBlogForm()" style="white-space: nowrap;">
+                            <i class="fas fa-plus"></i> Create New Blog
+                        </button>
+                    </div>
+
+                    <div class="blog-toolbar" style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <input type="text" id="blogSearch" placeholder="🔍 Search blogs by title, topic, keyword..." class="search-input" style="flex: 1; min-width: 250px;">
+                        <select id="blogFilter" class="filter-select" style="padding: 0.75rem 1rem; border-radius: 6px; border: 1px solid #ddd;">
+                            <option value="">All Blogs</option>
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+
+                    <div id="blogsList" class="blogs-list"></div>
+                </section>
+
+                <!-- Quick Stats for Blogs -->
+                <div style="display: none;" id="blogStatsSection">
+                    <div style="background: #f9f9f9; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h3 style="margin-top: 0; color: #1a365d;">Blog Statistics</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #d4af37;" id="publishedCount">0</div>
+                                <small style="color: #666;">Published Blogs</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #2d5a8c;" id="draftCount">0</div>
+                                <small style="color: #666;">Draft Blogs</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #27ae60;" id="totalCount">0</div>
+                                <small style="color: #666;">Total Blogs</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Form Section -->
+                <section class="admin-section" data-section="blog-form" style="display: none;">
+                    <h2 id="formTitle">Create New Blog</h2>
+                    
+                    <!-- Tabs for Basic & Advanced SEO -->
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" onclick="switchTab('basic')">Basic Information</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('seo')">🔍 SEO Optimization</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('keyword')">🎯 Keyword Research</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('content')">📊 Content Scoring</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('advanced')">⚙️ Advanced Settings</button>
+                    </div>
+
+                    <form id="blogForm" onsubmit="handleBlogSubmit(event)" class="blog-form">
+                        <!-- BASIC INFORMATION TAB -->
+                        <div class="form-tab active" id="basic">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="topicName">Topic Name *</label>
+                                        <input type="text" id="topicName" placeholder="e.g., Visa Tips, Scholarships, Universities" required>
+                                        <small>Category or topic for this blog</small>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="blogTitle">Blog Title (H1) *</label>
+                                        <input type="text" id="blogTitle" placeholder="Main headline of your blog" required>
+                                        <small>Used as the main heading and page title</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="blogContent">Blog Content *</label>
+                                <textarea id="blogContent" placeholder="Write your blog content here. Include headers (##), lists, and formatting..." rows="12" required></textarea>
+                                <small>Write comprehensive content (min 300 words recommended)</small>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="thumbnail">Thumbnail Image URL</label>
+                                        <input type="url" id="thumbnail" placeholder="https://example.com/image.jpg">
+                                        <div id="thumbnailPreview" class="thumbnail-preview"></div>
+                                        <small>Recommended size: 1200x630px</small>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="altText">Alt Text for Image (Accessibility)</label>
+                                        <input type="text" id="altText" placeholder="Describe what's in the image" maxlength="125">
+                                        <small>Important for SEO and accessibility</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEO OPTIMIZATION TAB -->
+                        <div class="form-tab" id="seo">
+                            <h3 style="color: #1a365d; margin-bottom: 20px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">🔍 SEO Optimization</h3>
+
+                            <div class="form-group">
+                                <label for="blogSlug">SEO-Friendly Slug/URL *</label>
+                                <input type="text" id="blogSlug" placeholder="e.g., 5-tips-study-abroad-visa" required>
+                                <small>Only letters, numbers, and hyphens. This becomes your blog URL.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="metaDescription">Meta Description (SERP Preview) *</label>
+                                <textarea id="metaDescription" placeholder="What searchers see in Google. Make it compelling!" rows="3" maxlength="160" required></textarea>
+                                <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                    <small>Appears under your title in search results</small>
+                                    <span id="charCount" style="font-weight: 600; color: #d4af37;">0/160</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="primaryKeyword">Primary Keyword/Focus Keyword *</label>
+                                <input type="text" id="primaryKeyword" placeholder="e.g., study abroad for Indian students" required>
+                                <small>Main keyword you want to rank for (should be in title, description, content)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="secondaryKeywords">Secondary Keywords (Comma-separated)</label>
+                                <input type="text" id="secondaryKeywords" placeholder="e.g., visa requirements, scholarship, universities">
+                                <small>Related keywords to improve ranking for multiple searches</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="focusedTopic">Focused Topic/Subtopic</label>
+                                <input type="text" id="focusedTopic" placeholder="e.g., US Visa Interview Tips">
+                                <small>More specific angle of your main topic</small>
+                            </div>
+
+                            <div class="seo-tips" style="background: #f0f8ff; padding: 15px; border-radius: 8px; border-left: 4px solid #d4af37; margin: 20px 0;">
+                                <strong style="color: #1a365d;">💡 SEO Tips:</strong>
+                                <ul style="margin: 10px 0 0 20px; color: #555;">
+                                    <li>Keep meta description between 150-160 characters</li>
+                                    <li>Include primary keyword in title and first 100 words</li>
+                                    <li>Use H2/H3 headings with secondary keywords</li>
+                                    <li>Write 1500+ words for better rankings</li>
+                                    <li>Add internal links to related blogs</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- KEYWORD RESEARCH TAB -->
+                        <div class="form-tab" id="keyword">
+                            <h3 style="color: #1a365d; margin-bottom: 20px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">🎯 Keyword Research & SERP Analysis</h3>
+
+                            <div class="form-group">
+                                <label for="mainKeyword">Main Target Keyword *</label>
+                                <input type="text" id="mainKeyword" placeholder="e.g., study abroad for Indian students" required>
+                                <small>The primary keyword you want to rank for in search results</small>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="keywordVolume">Keyword Search Volume</label>
+                                        <input type="number" id="keywordVolume" placeholder="e.g., 2400">
+                                        <small>Estimated monthly search volume (use Semrush, Ahrefs, or Google Keyword Planner)</small>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="keywordDifficulty">Keyword Difficulty (0-100)</label>
+                                        <input type="number" id="keywordDifficulty" placeholder="e.g., 45" min="0" max="100">
+                                        <small>Lower = easier to rank. Green (0-30), Yellow (30-60), Red (60+)</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="serpAnalysis">SERP Analysis - Top Competitors</label>
+                                <textarea id="serpAnalysis" placeholder="Analyze top 3 ranking pages. Include:&#10;1. URL of competitor&#10;2. Their word count&#10;3. Their backlinks&#10;4. Our advantage over them&#10;&#10;Example:&#10;1. competitor.com/article - 2500 words, 45 backlinks, but outdated info&#10;2. example.com/post - 1800 words, 32 backlinks, no visa info" rows="6"></textarea>
+                                <small>Study what's ranking to create better content. Use Semrush or SurferSEO for data.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="relatedKeywords">Related Keywords (Comma-separated)</label>
+                                <input type="text" id="relatedKeywords" placeholder="e.g., visa process, scholarship opportunities, top universities, admission requirements">
+                                <small>Keywords that users also search for when looking for your main keyword</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="longtailKeywords">Long-Tail Keywords (Comma-separated)</label>
+                                <input type="text" id="longtailKeywords" placeholder="e.g., how to get student visa for USA, best universities for MBA in Canada">
+                                <small>Longer, more specific keywords with lower competition</small>
+                            </div>
+
+                            <div class="seo-tips" style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800; margin: 20px 0;">
+                                <strong style="color: #1a365d;">🔍 Keyword Research Tools:</strong>
+                                <ul style="margin: 10px 0 0 20px; color: #555; font-size: 0.9rem;">
+                                    <li><strong>Google Keyword Planner:</strong> Free tool for search volume (Google Ads)</li>
+                                    <li><strong>Semrush:</strong> Comprehensive keyword & competitor analysis</li>
+                                    <li><strong>Ahrefs:</strong> Keyword volume, difficulty, search intent</li>
+                                    <li><strong>SurferSEO:</strong> SERP analysis and content optimization</li>
+                                    <li><strong>Moz Keyword Explorer:</strong> Keyword metrics and difficulty</li>
+                                    <li><strong>LowFruits:</strong> Find low-competition long-tail keywords</li>
+                                    <li><strong>AnswerThePublic:</strong> Find questions users are asking</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- CONTENT SCORING TAB -->
+                        <div class="form-tab" id="content">
+                            <h3 style="color: #1a365d; margin-bottom: 20px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">📊 Content Quality & Scoring</h3>
+
+                            <div class="form-group">
+                                <label>Content Completeness Score</label>
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                                    <div style="flex: 1; background: #f0f0f0; height: 30px; border-radius: 15px; overflow: hidden;">
+                                        <div id="contentCompleteScore" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6b6b, #ffa500, #4caf50); transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.85rem;"></div>
+                                    </div>
+                                    <span id="contentCompletePercent" style="min-width: 60px; font-weight: 600; color: #1a365d;">0%</span>
+                                </div>
+                                <small style="color: #666;">Based on word count (1500+ = high), headers, images, and internal links</small>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="headingStructure">Heading Structure (H2/H3 Count)</label>
+                                        <input type="number" id="headingStructure" placeholder="e.g., 6" min="0">
+                                        <small>Number of H2 and H3 headings in content (aim for 5-10)</small>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="imageCount">Images/Visuals Included</label>
+                                        <input type="number" id="imageCount" placeholder="e.g., 3" min="0">
+                                        <small>Number of images or infographics (1 per 300-400 words recommended)</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contentReadability">Readability Analysis</label>
+                                <select id="contentReadability">
+                                    <option value="">-- Select Readability Level --</option>
+                                    <option value="elementary">Elementary (Very Easy)</option>
+                                    <option value="high-school">High School (Easy)</option>
+                                    <option value="college">College (Moderate)</option>
+                                    <option value="graduate">Graduate (Difficult)</option>
+                                </select>
+                                <small>Use Hemingway Editor or Grammarly to check readability</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="grammarCheck">Grammar & Style Check</label>
+                                <select id="grammarCheck">
+                                    <option value="">-- Grammar Status --</option>
+                                    <option value="excellent">Excellent (0-2 errors)</option>
+                                    <option value="good">Good (3-5 errors)</option>
+                                    <option value="fair">Fair (6-10 errors)</option>
+                                    <option value="needs-work">Needs Work (10+ errors)</option>
+                                </select>
+                                <small>Use Grammarly to detect errors. Should be excellent before publishing.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contentDepth">Content Depth Assessment</label>
+                                <textarea id="contentDepth" placeholder="Rate content depth:&#10;- Comprehensive coverage of topic? Yes/No&#10;- Unique insights? Yes/No&#10;- Data/statistics included? Yes/No&#10;- Actionable tips? Yes/No&#10;- Examples provided? Yes/No" rows="5"></textarea>
+                                <small>Assess how thoroughly your content covers the topic</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contentFreshness">Content Freshness & Currency</label>
+                                <input type="date" id="contentFreshness" value="">
+                                <small>When is this content most relevant? Set update reminders.</small>
+                            </div>
+
+                            <div class="seo-tips" style="background: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50; margin: 20px 0;">
+                                <strong style="color: #1a365d;">📝 Content Scoring Tools:</strong>
+                                <ul style="margin: 10px 0 0 20px; color: #555; font-size: 0.9rem;">
+                                    <li><strong>Hemingway Editor:</strong> Check readability and sentence structure</li>
+                                    <li><strong>Grammarly:</strong> Grammar, spelling, and style suggestions</li>
+                                    <li><strong>SurferSEO:</strong> Compare with top-ranking competitors</li>
+                                    <li><strong>MarketMuse:</strong> Content gap analysis and recommendations</li>
+                                    <li><strong>ChatGPT/Claude:</strong> Content ideas and structure help</li>
+                                    <li><strong>Writesonic/Jasper:</strong> AI writing assistance for sections</li>
+                                </ul>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Overall Content Score</label>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; background: #f0f0f0; height: 35px; border-radius: 15px; overflow: hidden;">
+                                        <div id="overallContentScore" style="width: 0%; height: 100%; background: linear-gradient(90deg, #d4af37, #1a365d); transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;"></div>
+                                    </div>
+                                    <span id="overallContentPercent" style="min-width: 70px; font-weight: 600; color: #1a365d; font-size: 1.1rem;">0/100</span>
+                                </div>
+                                <small>Combination of SEO score + content quality score</small>
+                            </div>
+                        </div>
+
+                        <!-- ADVANCED SETTINGS TAB -->
+                        <div class="form-tab" id="advanced">
+                            <h3 style="color: #1a365d; margin-bottom: 20px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">⚙️ Advanced SEO & Content Settings</h3>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="contentLength">Estimated Content Length (words)</label>
+                                        <input type="number" id="contentLength" placeholder="Auto-calculated" readonly style="background: #f5f5f5; cursor: not-allowed;">
+                                        <small>Will auto-calculate from content</small>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="readingTime">Reading Time (minutes)</label>
+                                        <input type="number" id="readingTime" placeholder="Auto-calculated" readonly style="background: #f5f5f5; cursor: not-allowed;">
+                                        <small>Average 200 words per minute</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="internalLinks">Internal Links (One per line)</label>
+                                <textarea id="internalLinks" placeholder="Link to other blogs for SEO&#10;e.g., /blogs/visa-tips&#10;/blogs/universities" rows="4"></textarea>
+                                <small>Link to other NSV blogs for better SEO and user engagement</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="externalLinks">External Authoritative Links (One per line)</label>
+                                <textarea id="externalLinks" placeholder="Link to official/authoritative sources&#10;e.g., https://visaaustralia.gov.au&#10;https://www.qaa.ac.uk" rows="4"></textarea>
+                                <small>Link to trusted sources to improve credibility and SEO</small>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="canonicalURL">Canonical URL (Optional)</label>
+                                        <input type="url" id="canonicalURL" placeholder="https://yoursite.com/blog/article">
+                                        <small>Use if content exists elsewhere. Prevents duplicate content issues.</small>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="ogImage">Open Graph Image URL (Social Media)</label>
+                                        <input type="url" id="ogImage" placeholder="https://example.com/og-image.jpg">
+                                        <small>Image shown when shared on Facebook, Twitter, LinkedIn</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="schemaMarkup">Schema Markup Type</label>
+                                <select id="schemaMarkup">
+                                    <option value="">-- Select Schema Type --</option>
+                                    <option value="BlogPosting">BlogPosting</option>
+                                    <option value="Article">Article</option>
+                                    <option value="NewsArticle">NewsArticle</option>
+                                    <option value="WebPage">WebPage</option>
+                                </select>
+                                <small>Structured data to help search engines understand content</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="blogFaqs">Schema FAQs (JSON)</label>
+                                <textarea id="blogFaqs" placeholder='[{"question": "How to apply for visa?", "answer": "Visit official website..."}]' rows="5"></textarea>
+                                <small>Rich snippets in search results. Format: [{"question": "Q1", "answer": "A1"}]</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>SEO Score (Auto-calculated)</label>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; background: #f0f0f0; height: 30px; border-radius: 15px; overflow: hidden;">
+                                        <div id="seoScoreBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #d4af37, #1a365d); transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.85rem;"></div>
+                                    </div>
+                                    <span id="seoScoreValue" style="min-width: 50px; font-weight: 600; color: #1a365d;">0%</span>
+                                </div>
+                                <small>Improves as you fill in SEO fields</small>
+                            </div>
+
+                            <div class="seo-tips" style="background: #f0f8ff; padding: 15px; border-radius: 8px; border-left: 4px solid #d4af37; margin: 20px 0;">
+                                <strong style="color: #1a365d;">🎯 Advanced SEO Features:</strong>
+                                <ul style="margin: 10px 0 0 20px; color: #555;">
+                                    <li><strong>Schema Markup:</strong> Helps Google display rich results</li>
+                                    <li><strong>Internal Links:</strong> Improves site navigation and SEO</li>
+                                    <li><strong>Canonical URL:</strong> Prevents duplicate content penalties</li>
+                                    <li><strong>Open Graph:</strong> Better social media sharing</li>
+                                    <li><strong>Reading Time:</strong> Improves user engagement metrics</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- FORM ACTIONS -->
+                        <div class="form-actions" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                            <div class="form-group checkbox" style="margin-bottom: 15px;">
+                                <input type="checkbox" id="publishBlog">
+                                <label for="publishBlog"><strong>Publish this blog immediately</strong> (if unchecked, it will be saved as draft)</label>
+                            </div>
+
+                            <div style="display: flex; gap: 10px;">
+                                <button type="submit" class="btn btn-primary" style="flex: 1;">
+                                    <i class="fas fa-save"></i> Save Blog
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="goBackToBlogs()">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Inquiries Section -->
+                <section class="admin-section" data-section="inquiries">
+                    <h2>Student Inquiries</h2>
+                    <div id="inquiriesList" class="inquiries-list"></div>
+                </section>
+
+                <!-- Referrals Section -->
+                <section class="admin-section" data-section="referrals">
+                    <h2>Referrals</h2>
+                    <div id="referralsList" class="referrals-list"></div>
+                </section>
+
+                <!-- Counseling Section -->
+                <section class="admin-section" data-section="counseling">
+                    <h2>Counseling Requests</h2>
+                    <div id="counselingList" class="counseling-list"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <style>
+        /* ==================== ADMIN PANEL STYLES ==================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background: #f5f7fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+            gap: var(--spacing-lg);
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: var(--spacing-xl);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header h2 {
+            font-family: var(--font-primary);
+            font-size: 1.3rem;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--white);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            margin-left: 250px;
+            padding: var(--spacing-2xl);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-2xl);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8ecf1 100%);
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 8px;
+        }
+
+        .admin-header-left {
+            flex: 1;
+        }
+
+        .admin-header h1 {
+            font-family: var(--font-primary);
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-weight: 600;
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .admin-user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-user i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        /* Sections */
+        .admin-section {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-header h2 {
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--light-gray), rgba(212, 175, 55, 0.05));
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .stat-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.blogs {
+            background: rgba(26, 54, 93, 0.1);
+            color: var(--primary-color);
+        }
+
+        .stat-icon.inquiries {
+            background: rgba(52, 199, 89, 0.1);
+            color: #34C759;
+        }
+
+        .stat-icon.referrals {
+            background: rgba(255, 159, 64, 0.1);
+            color: #FF9F40;
+        }
+
+        .stat-icon.counseling {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .stat-card h3 {
+            font-family: var(--font-primary);
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-card small {
+            color: var(--dark-gray);
+        }
+
+        /* Activity */
+        .recent-section h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            font-family: var(--font-primary);
+        }
+
+        .activity-list {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .activity-item {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .activity-text strong {
+            color: var(--primary-color);
+        }
+
+        .activity-time {
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+        }
+
+        /* Blog Tools */
+        .blog-toolbar {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .search-input,
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: var(--font-secondary);
+        }
+
+        .search-input {
+            flex: 1;
+        }
+
+        /* Blogs List */
+        .blogs-list {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+
+        .blog-item {
+            background: var(--light-gray);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--spacing-lg);
+        }
+
+        .blog-item-content {
+            flex: 1;
+        }
+
+        .blog-item-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-item-content p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+
+        .blog-item-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .blog-item-actions button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all var(--transition-speed);
+        }
+
+        .blog-item-actions .btn-edit {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .blog-item-actions .btn-delete {
+            background: #dc3545;
+            color: var(--white);
+        }
+
+        .blog-item-actions .btn-publish {
+            background: #28a745;
+            color: var(--white);
+        }
+
+        .blog-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-published {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Blog Form */
+        .blog-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: var(--font-secondary);
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group small {
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+        }
+
+        .form-group.checkbox {
+            flex-direction: row;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .form-group.checkbox input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        #charCount {
+            text-align: right;
+            color: var(--dark-gray);
+        }
+
+        .thumbnail-preview {
+            margin-top: 0.5rem;
+            height: 150px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .thumbnail-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        /* Inquiries, Referrals, Counseling Lists */
+        .inquiries-list,
+        .referrals-list,
+        .counseling-list {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+        }
+
+        .inquiry-item,
+        .referral-item,
+        .counseling-item {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .inquiry-item:last-child,
+        .referral-item:last-child,
+        .counseling-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-header h4 {
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+        }
+
+        .item-details {
+            display: grid;
+            gap: 0.5rem;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .item-details p {
+            margin: 0;
+        }
+
+        .item-details strong {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-wrapper {
+                gap: var(--spacing-md);
+            }
+
+            .admin-sidebar {
+                width: 200px;
+            }
+
+            .admin-main {
+                margin-left: 200px;
+                padding: var(--spacing-lg);
+            }
+
+            .blog-item {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-wrapper {
+                flex-direction: column;
+            }
+
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .admin-main {
+                margin-left: 0;
+                padding: var(--spacing-md);
+            }
+
+            .sidebar-nav {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-md);
+            }
+
+            .admin-header {
+                flex-direction: column;
+                gap: var(--spacing-lg);
+                text-align: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .section-header .btn {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .form-tabs {
+                flex-direction: column;
+            }
+
+            .form-tabs .tab-btn {
+                width: 100%;
+            }
+        }
+
+        /* ==================== TAB STYLES ==================== */
+        
+        .form-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn:hover {
+            background: #f0f0f0;
+            color: #1a365d;
+        }
+
+        .tab-btn.active {
+            background: white;
+            border-color: #d4af37;
+            color: #1a365d;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .form-tab {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .form-tab.active {
+            display: block;
+        }
+
+        .form-tab h3 {
+            color: #1a365d;
+            margin-bottom: 15px;
+        }
+
+        .form-tab ul {
+            line-height: 1.8;
+        }
+
+        .form-tab ul li {
+            margin-bottom: 8px;
+        }
+
+        .blog-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .blog-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn.btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a8c 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #e6c75f 100%);
+            color: #1a365d;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        #seoScoreBar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.3s ease;
+        }
+
+        .seo-tips {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #d4af37;
+            margin: 20px 0;
+        }
+
+        .seo-tips strong {
+            color: #1a365d;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .seo-tips ul {
+            margin: 10px 0 0 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .seo-tips li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .sidebar-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-toolbar {
+                flex-direction: column;
+            }
+
+            .admin-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        // Check admin access
+        if (!isAdmin()) {
+            window.location.href = 'login.html';
+        }
+
+        // Update admin name
+        if (currentUser) {
+            document.getElementById('adminName').textContent = currentUser.username || 'Admin User';
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = item.getAttribute('data-section');
+                showSection(section);
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        function showSection(section) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+            
+            if (section === 'dashboard') {
+                updateDashboard();
+            } else if (section === 'blogs') {
+                loadBlogs();
+            } else if (section === 'inquiries') {
+                loadInquiries();
+            } else if (section === 'referrals') {
+                loadReferrals();
+            } else if (section === 'counseling') {
+                loadCounseling();
+            }
+        }
+
+        // Dashboard
+        function updateDashboard() {
+            const blogs = getBlogs();
+            const inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            const referrals = JSON.parse(localStorage.getItem('referrals')) || [];
+            const counseling = JSON.parse(localStorage.getItem('counsellingRequests')) || [];
+
+            document.getElementById('totalBlogs').textContent = blogs.length;
+            document.getElementById('totalInquiries').textContent = inquiries.length;
+            document.getElementById('totalReferrals').textContent = referrals.length;
+            document.getElementById('totalCounseling').textContent = counseling.length;
+
+            // Recent Activity
+            let allItems = [];
+            blogs.forEach(b => allItems.push({ type: 'blog', data: b, created: b.createdAt }));
+            inquiries.forEach(i => allItems.push({ type: 'inquiry', data: i, created: i.timestamp }));
+            referrals.forEach(r => allItems.push({ type: 'referral', data: r, created: r.timestamp }));
+            counseling.forEach(c => allItems.push({ type: 'counseling', data: c, created: c.timestamp }));
+
+            allItems.sort((a, b) => new Date(b.created) - new Date(a.created));
+            allItems = allItems.slice(0, 10);
+
+            const activityHtml = allItems.map(item => {
+                const date = new Date(item.created).toLocaleDateString();
+                let text = '';
+                if (item.type === 'blog') {
+                    text = `New blog "${item.data.title}" created`;
+                } else if (item.type === 'inquiry') {
+                    text = `New inquiry from ${item.data.name}`;
+                } else if (item.type === 'referral') {
+                    text = `New referral for ${item.data.contactName}`;
+                } else {
+                    text = `Counseling request from ${item.data.name}`;
+                }
+                return `
+                    <div class="activity-item">
+                        <div class="activity-text">
+                            <strong>${text}</strong>
+                            <span class="activity-time">${date}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('recentActivity').innerHTML = activityHtml || '<p style="padding: 20px; text-align: center; color: var(--dark-gray);">No activity yet</p>';
+        }
+
+        // Blogs
+        function loadBlogs() {
+            const blogs = getBlogs();
+            const html = blogs.map(blog => `
+                <div class="blog-item">
+                    <div class="blog-item-content">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <h3>${blog.title}</h3>
+                            <span class="blog-status ${blog.published ? 'status-published' : 'status-draft'}">
+                                ${blog.published ? 'Published' : 'Draft'}
+                            </span>
+                        </div>
+                        <p>${blog.metaDescription.substring(0, 100)}...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-tag"></i> ${blog.topic}</span>
+                            <span><i class="fas fa-calendar"></i> ${new Date(blog.createdAt).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                    <div class="blog-item-actions">
+                        <button class="btn-edit" onclick="editBlog(${blog.id})">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn-publish" onclick="toggleBlogPublish(${blog.id}, ${!blog.published})">
+                            <i class="fas fa-${blog.published ? 'times' : 'check'}"></i> ${blog.published ? 'Unpublish' : 'Publish'}
+                        </button>
+                        <button class="btn-delete" onclick="deleteBlogItem(${blog.id})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('blogsList').innerHTML = html || '<p style="text-align: center; padding: 20px; color: var(--dark-gray);">No blogs yet. Create your first blog!</p>';
+        }
+
+        function openBlogForm() {
+            document.getElementById('formTitle').textContent = 'Create New Blog';
+            document.getElementById('blogForm').reset();
+            document.getElementById('blogId').value = '';
+            showSection('blog-form');
+        }
+
+        function editBlog(blogId) {
+            const blogs = getBlogs();
+            const blog = blogs.find(b => b.id === blogId);
+            if (!blog) return;
+
+            document.getElementById('formTitle').textContent = 'Edit Blog';
+            document.getElementById('topicName').value = blog.topic || '';
+            document.getElementById('blogTitle').value = blog.title || '';
+            document.getElementById('metaDescription').value = blog.metaDescription || '';
+            document.getElementById('thumbnail').value = blog.thumbnail || '';
+            document.getElementById('altText').value = blog.altText || '';
+            document.getElementById('blogSlug').value = blog.slug || '';
+            document.getElementById('blogContent').value = blog.content || '';
+            document.getElementById('blogFaqs').value = JSON.stringify(blog.faqs || []);
+            document.getElementById('publishBlog').checked = blog.published;
+            document.getElementById('blogId').value = blogId;
+
+            if (blog.thumbnail) {
+                document.getElementById('thumbnailPreview').innerHTML = `<img src="${blog.thumbnail}" alt="${blog.altText}">`;
+            }
+
+            showSection('blog-form');
+        }
+
+        function handleBlogSubmit(event) {
+            event.preventDefault();
+
+            const blogId = document.getElementById('blogId').value;
+            const slug = document.getElementById('blogSlug').value.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
+
+            let faqs = [];
+            try {
+                const faqsText = document.getElementById('blogFaqs').value;
+                if (faqsText) faqs = JSON.parse(faqsText);
+            } catch (e) {
+                faqs = [];
+            }
+
+            const blog = {
+                id: blogId ? parseInt(blogId) : undefined,
+                topic: document.getElementById('topicName').value,
+                title: document.getElementById('blogTitle').value,
+                metaDescription: document.getElementById('metaDescription').value,
+                thumbnail: document.getElementById('thumbnail').value,
+                altText: document.getElementById('altText').value,
+                slug: slug,
+                content: document.getElementById('blogContent').value,
+                faqs: faqs,
+                published: document.getElementById('publishBlog').checked
+            };
+
+            saveBlog(blog);
+            showNotification('Blog saved successfully!', 'success');
+            showSection('blogs');
+            loadBlogs();
+        }
+
+        function toggleBlogPublish(blogId, published) {
+            toggleBlogVisibility(blogId, published);
+            showNotification(`Blog ${published ? 'published' : 'unpublished'}!`, 'success');
+            loadBlogs();
+        }
+
+        function deleteBlogItem(blogId) {
+            if (confirm('Are you sure you want to delete this blog?')) {
+                deleteBlog(blogId);
+                showNotification('Blog deleted successfully!', 'success');
+                loadBlogs();
+            }
+        }
+
+        function goBackToBlogs() {
+            showSection('blogs');
+        }
+
+        // Create hidden input for blog ID
+        const blogForm = document.getElementById('blogForm');
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.id = 'blogId';
+        blogForm.appendChild(hiddenInput);
+
+        // Meta description char count
+        document.getElementById('metaDescription').addEventListener('input', (e) => {
+            document.getElementById('charCount').textContent = e.target.value.length + '/160';
+        });
+
+        // Thumbnail preview
+        document.getElementById('thumbnail').addEventListener('change', (e) => {
+            if (e.target.value) {
+                document.getElementById('thumbnailPreview').innerHTML = `<img src="${e.target.value}" alt="preview" onerror="this.parentElement.innerHTML='<p>Invalid image URL</p>'">`;
+            }
+        });
+
+        // Inquiries
+        function loadInquiries() {
+            const inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            const html = inquiries.map(inquiry => `
+                <div class="inquiry-item">
+                    <div class="item-header">
+                        <h4>${inquiry.name}</h4>
+                        <span style="color: var(--dark-gray); font-size: 0.85rem;">${new Date(inquiry.timestamp).toLocaleDateString()}</span>
+                    </div>
+                    <div class="item-details">
+                        <p><strong>Email:</strong> ${inquiry.email}</p>
+                        <p><strong>Phone:</strong> ${inquiry.phone}</p>
+                        <p><strong>Message:</strong> ${inquiry.message}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('inquiriesList').innerHTML = html || '<p style="padding: 20px; text-align: center; color: var(--dark-gray);">No inquiries yet</p>';
+        }
+
+        // Referrals
+        function loadReferrals() {
+            const referrals = JSON.parse(localStorage.getItem('referrals')) || [];
+            const html = referrals.map(referral => `
+                <div class="referral-item">
+                    <div class="item-header">
+                        <h4>Referral from ${referral.referrerPhone}</h4>
+                        <span style="color: var(--dark-gray); font-size: 0.85rem;">${new Date(referral.timestamp).toLocaleDateString()}</span>
+                    </div>
+                    <div class="item-details">
+                        <p><strong>Contact Name:</strong> ${referral.contactName}</p>
+                        <p><strong>Contact Phone:</strong> ${referral.contactPhone}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('referralsList').innerHTML = html || '<p style="padding: 20px; text-align: center; color: var(--dark-gray);">No referrals yet</p>';
+        }
+
+        // Counseling
+        function loadCounseling() {
+            const counseling = JSON.parse(localStorage.getItem('counsellingRequests')) || [];
+            const html = counseling.map(req => `
+                <div class="counseling-item">
+                    <div class="item-header">
+                        <h4>${req.name}</h4>
+                        <span style="color: var(--dark-gray); font-size: 0.85rem;">${new Date(req.timestamp).toLocaleDateString()}</span>
+                    </div>
+                    <div class="item-details">
+                        <p><strong>Email:</strong> ${req.email}</p>
+                        <p><strong>Phone:</strong> ${req.phone}</p>
+                        <p><strong>Interest:</strong> ${req.interest}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('counselingList').innerHTML = html || '<p style="padding: 20px; text-align: center; color: var(--dark-gray);">No counseling requests yet</p>';
+        }
+
+        // Initialize
+        updateDashboard();
+        
+        // Setup admin panel for blog management
+        if (typeof setupAdminPanel === 'function') {
+            setupAdminPanel();
+        }
+        
+        // Handle section switching
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = item.getAttribute('data-section');
+                
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+                
+                item.classList.add('active');
+                document.querySelector(`[data-section="${section}"]`).classList.add('active');
+                
+                if (section === 'blogs') {
+                    if (typeof loadAdminBlogs === 'function') {
+                        loadAdminBlogs();
+                    }
+                } else if (section === 'inquiries') {
+                    loadInquiries();
+                } else if (section === 'referrals') {
+                    loadReferrals();
+                } else if (section === 'counseling') {
+                    loadCounseling();
+                }
+            });
+        });
+        
+        // Initialize first nav item as active
+        document.querySelector('.nav-item').classList.add('active');
+    </script>
+</body>
+</html>

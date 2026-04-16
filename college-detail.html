@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="College Details - NSV Overseas">
+    <title>College Details | NSV Overseas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .college-header {
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a8c 100%);
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .college-header-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .college-logo {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .college-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .college-header-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .college-header-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .college-header-info p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .college-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.2);
+            padding: 12px 20px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            font-weight: 600;
+        }
+
+        .college-details-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .detail-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .detail-section h2 {
+            color: #1a365d;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .detail-section h3 {
+            color: #1a365d;
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        .detail-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .programs-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .program-item {
+            background: #f9f9f9;
+            padding: 12px 15px;
+            border-left: 4px solid #d4af37;
+            border-radius: 4px;
+            color: #1a365d;
+            font-weight: 500;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid #d4af37;
+        }
+
+        .info-card h4 {
+            color: #1a365d;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .info-value {
+            color: #1a365d;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-visit {
+            background: #1a365d;
+            color: white;
+        }
+
+        .btn-visit:hover {
+            background: #d4af37;
+            color: #1a365d;
+        }
+
+        .btn-counseling {
+            background: #d4af37;
+            color: #1a365d;
+        }
+
+        .btn-counseling:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #1a365d;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #d4af37;
+            color: #1a365d;
+        }
+
+        .faq-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-question {
+            background: #f9f9f9;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1a365d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f0f0f0;
+        }
+
+        .faq-answer {
+            padding: 15px;
+            color: #555;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .college-details-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .college-header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .college-header-info h1 {
+                font-size: 1.8rem;
+            }
+
+            .programs-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="logo.svg" alt="NSV Overseas Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#courses" class="nav-link">Courses</a>
+                    <a href="index.html#education-loans" class="nav-link">Education Loans</a>
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                    <a href="referral.html" class="nav-link">Referrals</a>
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="nav-link">Login / Register</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- College Header -->
+    <section class="college-header">
+        <div class="container">
+            <div class="college-header-content">
+                <div class="college-logo">
+                    <img id="collegeLogo" src="" alt="College Logo" onerror="this.parentElement.innerHTML='<i class=\"fas fa-university\" style=\"font-size:4rem;color:#1a365d;\"></i>'">
+                </div>
+                <div class="college-header-info">
+                    <h1 id="collegeName">Loading...</h1>
+                    <p id="collegeDescription">Loading college information...</p>
+                    <div class="college-badges">
+                        <span class="badge">
+                            <i class="fas fa-calendar-alt"></i>
+                            Founded: <span id="founded">-</span>
+                        </span>
+                        <span class="badge">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="city">-</span>
+                        </span>
+                        <span class="badge">
+                            <i class="fas fa-award"></i>
+                            <span id="ranking">-</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- College Details -->
+    <section style="margin: 50px 0;">
+        <div class="container">
+            <a href="" class="back-button" id="backButton">
+                <i class="fas fa-arrow-left"></i> Back to Colleges
+            </a>
+
+            <div class="college-details-container">
+                <!-- Main Content -->
+                <div>
+                    <!-- Overview -->
+                    <div class="detail-section">
+                        <h2>Overview</h2>
+                        <p id="detailDescription">Loading...</p>
+                        <p id="type">-</p>
+                        <p id="website">-</p>
+                    </div>
+
+                    <!-- Programs -->
+                    <div class="detail-section">
+                        <h2>Programs Offered</h2>
+                        <div class="programs-list" id="programsList">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Admission Requirements -->
+                    <div class="detail-section">
+                        <h2>Admission Requirements</h2>
+                        <p id="admission">Loading...</p>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="detail-section">
+                        <h2>Why Choose This University?</h2>
+                        <ul class="features-list" id="featuresList">
+                            <!-- Will be populated by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="faq-section">
+                        <h2 style="color: #1a365d; margin-bottom: 20px;">Frequently Asked Questions</h2>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>What are the application deadlines?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Application deadlines vary by program and intake (Fall, Spring, Winter). Generally, Fall intake applications close by May-June, while Spring intake closes by November-December. We recommend starting your application process early to ensure all documents are submitted on time.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Is financial aid available for international students?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, many universities offer scholarships and financial aid to international students based on academic merit, financial need, or specific criteria. Merit-based scholarships often cover partial to full tuition. We can help you explore available options.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>What is the IELTS or TOEFL requirement?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>English language requirements depend on your undergraduate degree. If you completed your degree in English, you may be exempt. Otherwise, IELTS (6.5-7.0) or TOEFL (90-100) is typically required. Some universities offer conditional admission with ESL programs.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>How do I apply for a student visa?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Once you receive an admission offer, the university provides documentation needed for visa application. Requirements typically include: acceptance letter, proof of financial support, passport, and health checks. We provide comprehensive visa guidance throughout the process.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Can I work while studying?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Most countries allow international students to work part-time (15-20 hours/week) during studies and full-time during semester breaks. This helps offset living expenses. Specific work allowances vary by country and visa conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Fees Info -->
+                    <div class="info-card">
+                        <h4>Tuition Fee</h4>
+                        <p id="tuitionInfo">Loading...</p>
+                        <div class="info-value" id="tuitionValue">-</div>
+                    </div>
+
+                    <!-- Accommodation -->
+                    <div class="info-card">
+                        <h4>Accommodation Cost</h4>
+                        <p id="accommodationInfo">Loading...</p>
+                        <div class="info-value" id="accommodationValue">-</div>
+                    </div>
+
+                    <!-- Student Population -->
+                    <div class="info-card">
+                        <h4>Student Life</h4>
+                        <div class="info-value" id="studentLife">-</div>
+                        <p style="margin-top: 10px; font-size: 0.9rem;">Vibrant community of students from around the world.</p>
+                    </div>
+
+                    <!-- Contact Buttons -->
+                    <div class="contact-buttons">
+                        <a href="" class="btn-contact btn-visit" id="visitBtn" target="_blank">
+                            <i class="fas fa-globe"></i> Visit Official Website
+                        </a>
+                        <button class="btn-contact btn-counseling" onclick="bookCounseling()">
+                            <i class="fas fa-calendar-check"></i> Book Free Counseling
+                        </button>
+                        <a href="https://wa.me/919885885847?text=Hi%20NSV%20Overseas%2C%20I%20am%20interested%20in%20this%20university" class="btn-contact" style="background: #25d366; color: white; text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                    <p>Making study abroad accessible and successful for every aspiring student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="referral.html">Referrals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        // Get college ID from URL
+        function getCollegeIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('college');
+        }
+
+        // Load and display college details
+        function loadCollegeDetails() {
+            const collegeId = getCollegeIdFromURL();
+            const college = getCollegeDetails(collegeId);
+
+            if (!college) {
+                document.body.innerHTML = '<div style="text-align:center;padding:60px 20px;"><h2>College not found</h2><p><a href="index.html">Go back home</a></p></div>';
+                return;
+            }
+
+            // Update header
+            document.getElementById('collegeName').textContent = college.name;
+            document.getElementById('collegeDescription').textContent = college.description;
+            document.getElementById('collegeLogo').src = college.logo;
+            document.getElementById('founded').textContent = college.founded;
+            document.getElementById('city').textContent = college.city;
+            document.getElementById('ranking').textContent = college.ranking;
+
+            // Update main content
+            document.getElementById('detailDescription').textContent = college.description;
+            document.getElementById('type').innerHTML = `<strong>Type:</strong> ${college.type}`;
+            document.getElementById('website').innerHTML = `<strong>Website:</strong> <a href="${college.website}" target="_blank" style="color:#d4af37;">${college.website}</a>`;
+            document.getElementById('admission').textContent = college.admission;
+
+            // Programs
+            const programsList = document.getElementById('programsList');
+            programsList.innerHTML = college.programs.map(prog => `<div class="program-item"><i class="fas fa-check-circle"></i> ${prog}</div>`).join('');
+
+            // Features
+            const featuresList = document.getElementById('featuresList');
+            featuresList.innerHTML = college.features.map(feat => `<li>${feat}</li>`).join('');
+
+            // Fees
+            document.getElementById('tuitionValue').textContent = college.tuitionFee;
+            document.getElementById('accommodationValue').textContent = college.accommodation;
+            document.getElementById('studentLife').textContent = college.studentLife;
+
+            // Buttons
+            document.getElementById('visitBtn').href = college.website;
+            document.getElementById('backButton').href = `country-detail.html?country=${college.country}`;
+
+            // Setup mobile menu toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+                const menu = document.getElementById('navbarMenu');
+                menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+            });
+        }
+
+        // Toggle FAQ
+        function toggleFAQ(element) {
+            element.parentElement.classList.toggle('active');
+            const icon = element.querySelector('i');
+            icon.style.transform = icon.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // Book counseling
+        function bookCounseling() {
+            window.location.href = 'index.html';
+            setTimeout(() => {
+                document.getElementById('counsellingModal').style.display = 'block';
+            }, 500);
+        }
+
+        // Initialize on load
+        window.addEventListener('load', loadCollegeDetails);
+    </script>
+</body>
+</html>

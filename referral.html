@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NSV Overseas Referral Program - Earn up to ₹50,000 for every successful referral. Share and earn rewarding commissions.">
+    <meta name="keywords" content="Referral Program, Study Abroad Referral, Earn Money, Student Referral">
+    <meta name="author" content="NSV Overseas">
+    <title>Referral Program - NSV Overseas | Earn by Referring</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Announcement Banner -->
+    <div class="announcement-banner" id="announcementBanner">
+        <div class="announcement-content">
+            <i class="fas fa-bullhorn"></i>
+            <span>Join Our Referral Program & Start Earning Today!</span>
+            <div class="announcement-buttons">
+                <button class="btn btn-sm btn-gold" onclick="scrollToSection('referral-form')">Refer Now</button>
+            </div>
+        </div>
+        <button class="announcement-close" onclick="closeAnnouncement()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="logo.svg" alt="NSV Overseas Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#about" class="nav-link">About Us</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#courses" class="nav-link">Courses</a>
+                    <a href="index.html#education-loans" class="nav-link">Education Loans</a>
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                    <a href="#referral-form" class="nav-link active">Referrals</a>
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </nav>
+
+                <a href="index.html" class="btn btn-primary">Back Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="referral-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Share & Earn Program</h1>
+                <p class="hero-subtitle">Help your friends achieve their study abroad dreams and earn rewards for every successful referral!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How Our Referral Program Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Share Your Referral Code</h3>
+                    <p>Get your unique referral code and share it with your friends and connections who are interested in studying abroad.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Friend Takes Consultation</h3>
+                    <p>Your friend connects with NSV Overseas using your referral code and takes a free counselling session with our expert advisors.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Complete Enrollment</h3>
+                    <p>Your friend enrolls in any of our programs or takes admission in their chosen university through our guidance.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get Your Rewards</h3>
+                    <p>Once the referral is confirmed, earn up to ₹50,000 in rewards. The more referrals, the more you earn!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Structure -->
+    <section class="rewards-section">
+        <div class="container">
+            <h2 class="section-title">Referral Rewards Structure</h2>
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-tier">Silver Tier</div>
+                    <div class="reward-amount">₹5,000</div>
+                    <p>For each successful student referral who completes initial counselling and enrollment process</p>
+                    <div class="reward-benefits">
+                        <ul>
+                            <li>Direct transfer to your bank account</li>
+                            <li>Processed within 7 days</li>
+                            <li>Unlimited referrals allowed</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reward-card featured">
+                    <div class="reward-tier">Gold Tier</div>
+                    <div class="reward-amount">₹50,000</div>
+                    <p>For each successful student referral who gets admitted to an international university</p>
+                    <div class="reward-benefits">
+                        <ul>
+                            <li>Priority payment processing</li>
+                            <li>Processed within 3 days</li>
+                            <li>Exclusive referrer benefits</li>
+                            <li>Bonus on every 5th referral</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-tier">Platinum Tier</div>
+                    <div class="reward-amount">₹15,000+</div>
+                    <p>Special incentives for referring 10+ successful students in a year</p>
+                    <div class="reward-benefits">
+                        <ul>
+                            <li>VIP recognition</li>
+                            <li>Personal account manager</li>
+                            <li>Additional bonuses</li>
+                            <li>Exclusive events access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referral Form Section -->
+    <section class="referral-form-section" id="referral-form">
+        <div class="container">
+            <h2 class="section-title">Start Your Referral Journey</h2>
+            <div class="form-container">
+                <form id="referralForm" onsubmit="handleReferralForm(event)">
+                    <div class="form-section">
+                        <h3><i class="fas fa-user-check"></i> Your Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="referrerPhone">Your Phone Number *</label>
+                            <input type="tel" id="referrerPhone" placeholder="Enter your phone number" required pattern="[0-9]{10}">
+                            <small>We'll use this to track your referrals and process rewards</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-user-friends"></i> Referred Person's Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="contactName">Referred Person's Name *</label>
+                            <input type="text" id="contactName" placeholder="Enter their full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactPhone">Referred Person's Phone Number *</label>
+                            <input type="tel" id="contactPhone" placeholder="Enter their phone number" required pattern="[0-9]{10}">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="termsAgree" required>
+                            <label for="termsAgree">
+                                I agree that the referred person will contact NSV Overseas through this link, and I'm eligible for rewards upon successful enrollment
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        <i class="fas fa-paper-plane"></i> Submit Referral
+                    </button>
+
+                    <p class="form-note">
+                        <i class="fas fa-info-circle"></i>
+                        Our team will verify the referral and confirm your rewards eligibility within 7 days.
+                    </p>
+                </form>
+
+                <div class="referral-info-box">
+                    <h3>Important Information</h3>
+                    <ul>
+                        <li><strong>Rewards are processed</strong> once the referred student completes enrollment</li>
+                        <li><strong>No limit on referrals</strong> - Refer as many friends as you want</li>
+                        <li><strong>Transparent tracking</strong> - Track your referrals in real-time</li>
+                        <li><strong>Quick payments</strong> - Direct bank transfers within days</li>
+                        <li><strong>Referral bonus</strong> - Extra incentives for bulk referrals</li>
+                        <li><strong>Supporting documents</strong> - We'll handle all verification processes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Referrers -->
+    <section class="success-section">
+        <div class="container">
+            <h2 class="section-title">Top Referrers This Year</h2>
+            <div class="referrers-grid">
+                <div class="referrer-card">
+                    <div class="referrer-rank">
+                        <i class="fas fa-trophy"></i>
+                        <span>1st</span>
+                    </div>
+                    <h3>Rahul Sharma</h3>
+                    <p class="referral-count">₹1,25,000 Earned</p>
+                    <p class="referral-details">25 successful referrals</p>
+                    <span class="badge">Gold Member</span>
+                </div>
+
+                <div class="referrer-card">
+                    <div class="referrer-rank">
+                        <i class="fas fa-medal"></i>
+                        <span>2nd</span>
+                    </div>
+                    <h3>Priya Verma</h3>
+                    <p class="referral-count">₹95,000 Earned</p>
+                    <p class="referral-details">19 successful referrals</p>
+                    <span class="badge">Gold Member</span>
+                </div>
+
+                <div class="referrer-card">
+                    <div class="referrer-rank">
+                        <i class="fas fa-award"></i>
+                        <span>3rd</span>
+                    </div>
+                    <h3>Ankit Patel</h3>
+                    <p class="referral-count">₹80,000 Earned</p>
+                    <p class="referral-details">16 successful referrals</p>
+                    <span class="badge">Silver Member</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I join the referral program?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Simply fill in the referral form above with your information and your friend's details. Once submitted, you'll get a unique referral code to share with others.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>When do I receive my referral rewards?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Rewards are processed within 7 days of the referred student completing their enrollment. For Gold Tier referrals, payment is processed within 3 days of confirmed admission.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is there a limit to how many people I can refer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No! There's no limit. Refer as many friends as you want and earn rewards for each successful referral. The more you refer, the more you earn!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How are referral rewards transferred?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Rewards are transferred directly to your bank account via NEFT/RTGS. You'll need to provide your bank details during the referral submission or verification process.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I track my referrals?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You can track all your referrals by logging in to your account. We provide real-time updates on referral status and reward payments.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What happens if my referred friend doesn't join?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No worries! There's no penalty. You only earn rewards when your referral successfully enrolls in our programs. You can keep referring others.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="referral-cta">
+        <div class="container">
+            <h2>Ready to Start Earning?</h2>
+            <p>Join thousands of successful referrers earning rewards with NSV Overseas</p>
+            <button class="btn btn-lg btn-primary" onclick="scrollToSection('referral-form')">
+                <i class="fas fa-arrow-right"></i> Submit Your First Referral
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>Email: overseasnsv@gmail.com</p>
+                    <p>Phone: 9885885847</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <style>
+        /* ==================== REFERRAL PAGE SPECIFIC STYLES ==================== */
+        
+        .referral-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f1f3a 100%);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .referral-hero .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .referral-hero .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .step {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-speed);
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .step h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            font-family: var(--font-primary);
+        }
+
+        .step p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Rewards Section */
+        .rewards-section {
+            background: var(--light-gray);
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .reward-card {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-speed);
+            position: relative;
+        }
+
+        .reward-card.featured {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .reward-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .reward-tier {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reward-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: var(--spacing-md) 0;
+            font-family: var(--font-primary);
+        }
+
+        .reward-benefits {
+            margin-top: var(--spacing-lg);
+            text-align: left;
+        }
+
+        .reward-benefits ul {
+            list-style: none;
+        }
+
+        .reward-benefits li {
+            padding: 0.5rem 0;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .reward-benefits li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Referral Form Section */
+        .referral-form-section {
+            padding: var(--spacing-3xl) 0;
+            background: var(--white);
+        }
+
+        .form-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: var(--spacing-2xl);
+            background: var(--light-gray);
+            padding: var(--spacing-2xl);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .form-section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-section h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-family: var(--font-primary);
+        }
+
+        .form-section h3 i {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .form-group input {
+            padding: 0.75rem var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: var(--font-secondary);
+            transition: border-color var(--transition-speed);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group small {
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            align-items: flex-start;
+        }
+
+        .terms-checkbox input {
+            margin-top: 0.25rem;
+            cursor: pointer;
+        }
+
+        .terms-checkbox label {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+        }
+
+        .form-note {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-md);
+            background: rgba(26, 54, 93, 0.05);
+            border-left: 3px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+        }
+
+        .referral-info-box {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            height: fit-content;
+        }
+
+        .referral-info-box h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            font-family: var(--font-primary);
+        }
+
+        .referral-info-box ul {
+            list-style: none;
+        }
+
+        .referral-info-box li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .referral-info-box li:last-child {
+            border-bottom: none;
+        }
+
+        .referral-info-box strong {
+            color: var(--primary-color);
+        }
+
+        /* Success Referrers Section */
+        .success-section {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.05), rgba(212, 175, 55, 0.05));
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .referrers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .referrer-card {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transition: all var(--transition-speed);
+        }
+
+        .referrer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .referrer-rank {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .referrer-rank i {
+            font-size: 1.5rem;
+        }
+
+        .referrer-rank span {
+            font-size: 0.9rem;
+        }
+
+        .referrer-card h3 {
+            margin-top: var(--spacing-lg);
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+        }
+
+        .referral-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: var(--spacing-md) 0;
+        }
+
+        .referral-details {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: var(--spacing-md);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--white);
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .faq-item {
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: var(--spacing-lg);
+            background: var(--light-gray);
+            border: none;
+            border-radius: var(--border-radius);
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-family: var(--font-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-speed);
+        }
+
+        .faq-question:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .faq-question i {
+            transition: transform var(--transition-speed);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed);
+            background: var(--white);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: var(--spacing-lg);
+        }
+
+        .faq-answer p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .referral-cta {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f1f3a 100%);
+            color: var(--white);
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+        }
+
+        .referral-cta h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            font-family: var(--font-primary);
+        }
+
+        .referral-cta p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr;
+            }
+
+            .reward-card.featured {
+                transform: scale(1);
+            }
+
+            .referrers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .referral-hero .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

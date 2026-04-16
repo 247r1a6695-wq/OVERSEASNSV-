@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study in _____ - Universities, courses, visa requirements, and career opportunities">
+    <meta name="author" content="NSV Overseas">
+    <title>Study Abroad - NSV Overseas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .country-banner {
+            background: linear-gradient(135deg, var(--primary-color), #0f1f3a);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .country-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-primary);
+        }
+
+        .country-banner p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .country-overview {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .overview-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            border-top: 3px solid var(--secondary-color);
+        }
+
+        .overview-stat h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .overview-stat p {
+            color: var(--dark-gray);
+        }
+
+        .country-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .colleges-section {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .colleges-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-primary);
+            font-size: 2rem;
+        }
+
+        .college-search {
+            margin-bottom: 2rem;
+        }
+
+        .college-search input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all var(--transition-speed);
+        }
+
+        .college-search input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+        }
+
+        .colleges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .college-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+
+        .college-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-color);
+        }
+
+        .college-header {
+            background: linear-gradient(135deg, var(--primary-color), #0f1f3a);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .college-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-family: var(--font-primary);
+        }
+
+        .college-content {
+            padding: 1.5rem;
+        }
+
+        .college-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .college-info i {
+            color: var(--secondary-color);
+            width: 20px;
+        }
+
+        .college-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .college-actions button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-speed);
+        }
+
+        .college-actions .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .college-actions .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .college-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--dark-gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-globe" style="font-size: 2rem; color: var(--primary-color);"></i>
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#courses" class="nav-link">Courses</a>
+                    <a href="index.html#education-loans" class="nav-link">Education Loans</a>
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                    <a href="referral.html" class="nav-link">Referrals</a>
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                </nav>
+
+                <button class="btn btn-primary" onclick="window.location.href='index.html#contact'">Get Counselling</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Country Banner -->
+    <div class="country-banner" id="countryBanner">
+        <h1 id="countryName">Country</h1>
+        <p id="countryTagline">Explore opportunities to study abroad</p>
+    </div>
+
+    <!-- Country Overview -->
+    <div class="country-container">
+        <div class="country-overview" id="countryOverview">
+            <h2 style="color: var(--primary-color); margin-bottom: 1.5rem; font-family: var(--font-primary);">Country Overview</h2>
+            <div id="overviewContent"></div>
+        </div>
+
+        <!-- Colleges Section -->
+        <div class="colleges-section">
+            <h2>Top Universities & Colleges</h2>
+            <div class="college-search">
+                <input type="text" id="collegeSearch" placeholder="Search universities or colleges..." onkeyup="filterColleges()">
+            </div>
+            <div class="colleges-grid" id="collegesGrid"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: overseasnsv@gmail.com</p>
+                    <p>Phone: 9885885847</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+    <script>
+        const countryDatabase = {
+            'USA': {
+                tagline: 'Land of Opportunities & Innovation',
+                overview: `
+                    <div class="overview-grid">
+                        <div class="overview-stat">
+                            <h3>4000+</h3>
+                            <p>Universities</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>$50K-$80K</h3>
+                            <p>Avg. Annual Cost</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>OPT Available</h3>
+                            <p>Post-Study Work</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>F-1 Visa</h3>
+                            <p>Student Visa</p>
+                        </div>
+                    </div>
+                    <p><strong>Why Study in USA?</strong> World-class education, cutting-edge research opportunities, diverse campus life, and excellent career prospects in tech, finance, and healthcare sectors.</p>
+                `,
+                colleges: [
+                    { name: 'Harvard University', location: 'Massachusetts', courses: 'All', intakes: 'Jan, Sept', fees: '$60,000+' },
+                    { name: 'MIT', location: 'Massachusetts', courses: 'Engineering, CS, Science', intakes: 'Jan, Sept', fees: '$65,000+' },
+                    { name: 'Stanford University', location: 'California', courses: 'Engineering, MBA, CS', intakes: 'Jan, Sept', fees: '$62,000+' },
+                    { name: 'UCLA', location: 'California', courses: 'All', intakes: 'Jan, Sept', fees: '$45,000+' },
+                    { name: 'University of Chicago', location: 'Illinois', courses: 'All', intakes: 'Jan, Sept', fees: '$58,000+' },
+                    { name: 'Columbia University', location: 'New York', courses: 'All', intakes: 'Jan, Sept', fees: '$62,000+' }
+                ]
+            },
+            'UK': {
+                tagline: 'Prestigious Education with Global Recognition',
+                overview: `
+                    <div class="overview-grid">
+                        <div class="overview-stat">
+                            <h3>180+</h3>
+                            <p>Universities</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>£15K-£35K</h3>
+                            <p>Avg. Annual Cost</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>Post-Study</h3>
+                            <p>2-Year Work Visa</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>Tier 4 Visa</h3>
+                            <p>Student Visa</p>
+                        </div>
+                    </div>
+                    <p><strong>Why Study in UK?</strong> Historic institutions, quality education, international recognition, generous post-study work visas, and vibrant student communities.</p>
+                `,
+                colleges: [
+                    { name: 'University of Oxford', location: 'Oxford', courses: 'All', intakes: 'Jan, Sept', fees: '£25,000+' },
+                    { name: 'University of Cambridge', location: 'Cambridge', courses: 'All', intakes: 'Jan, Sept', fees: '£28,000+' },
+                    { name: 'London School of Economics', location: 'London', courses: 'Business, Economics, Law', intakes: 'Jan, Sept', fees: '£30,000+' },
+                    { name: 'Imperial College London', location: 'London', courses: 'Engineering, Science, MBA', intakes: 'Jan, Sept', fees: '£32,000+' },
+                    { name: 'University of Manchester', location: 'Manchester', courses: 'All', intakes: 'Jan, Sept', fees: '£18,000+' },
+                    { name: 'University of Edinburgh', location: 'Edinburgh', courses: 'All', intakes: 'Jan, Sept', fees: '£20,000+' }
+                ]
+            },
+            'Canada': {
+                tagline: 'Quality Education & Excellent Post-Study Work',
+                overview: `
+                    <div class="overview-grid">
+                        <div class="overview-stat">
+                            <h3>200+</h3>
+                            <p>Universities</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>CAD 20K-40K</h3>
+                            <p>Avg. Annual Cost</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>3-Year Work Visa</h3>
+                            <p>Post-Study Options</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>Study Permit</h3>
+                            <p>Student Visa</p>
+                        </div>
+                    </div>
+                    <p><strong>Why Study in Canada?</strong> Affordable tuition, welcoming to international students, excellent universities, high post-study work visa duration, and pathway to permanent residency.</p>
+                `,
+                colleges: [
+                    { name: 'University of Toronto', location: 'Toronto', courses: 'All', intakes: 'Jan, Sept', fees: 'CAD 30,000+' },
+                    { name: 'UBC (University of British Columbia)', location: 'Vancouver', courses: 'All', intakes: 'Jan, Sept', fees: 'CAD 28,000+' },
+                    { name: 'McGill University', location: 'Montreal', courses: 'All', intakes: 'Jan, Sept', fees: 'CAD 25,000+' },
+                    { name: 'McMaster University', location: 'Hamilton', courses: 'Engineering, Health Sciences', intakes: 'Jan, Sept', fees: 'CAD 20,000+' },
+                    { name: 'Waterloo University', location: 'Waterloo', courses: 'Engineering, CS, Math', intakes: 'Jan, Sept', fees: 'CAD 35,000+' },
+                    { name: 'Alberta University', location: 'Edmonton', courses: 'All', intakes: 'Jan, Sept', fees: 'CAD 18,000+' }
+                ]
+            },
+            'Australia': {
+                tagline: 'World-Class Education with Amazing Lifestyle',
+                overview: `
+                    <div class="overview-grid">
+                        <div class="overview-stat">
+                            <h3>43</h3>
+                            <p>Universities</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>AUD 25K-45K</h3>
+                            <p>Avg. Annual Cost</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>2-3 Year Work Visa</h3>
+                            <p>Post-Study Options</p>
+                        </div>
+                        <div class="overview-stat">
+                            <h3>Student Visa</h3>
+                            <p>Subclass 500</p>
+                        </div>
+                    </div>
+                    <p><strong>Why Study in Australia?</strong> Top-ranked universities, high quality of life, part-time work allowed, excellent post-study work options, and beautiful environment.</p>
+                `,
+                colleges: [
+                    { name: 'University of Melbourne', location: 'Melbourne', courses: 'All', intakes: 'Feb, July', fees: 'AUD 40,000+' },
+                    { name: 'University of Sydney', location: 'Sydney', courses: 'All', intakes: 'Feb, July', fees: 'AUD 38,000+' },
+                    { name: 'Australian National University', location: 'Canberra', courses: 'All', intakes: 'Feb, July', fees: 'AUD 42,000+' },
+                    { name: 'UNSW Sydney', location: 'Sydney', courses: 'Engineering, Business, Science', intakes: 'Feb, July', fees: 'AUD 45,000+' },
+                    { name: 'Monash University', location: 'Melbourne', courses: 'All', intakes: 'Feb, July', fees: 'AUD 35,000+' },
+                    { name: 'University of Queensland', location: 'Brisbane', courses: 'All', intakes: 'Feb, July', fees: 'AUD 38,000+' }
+                ]
+            }
+        };
+
+        let currentCountry = '';
+        let allColleges = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCountryData();
+            setupMobileMenu();
+        });
+
+        function loadCountryData() {
+            const params = new URLSearchParams(window.location.search);
+            currentCountry = params.get('country') || 'USA';
+
+            if (!countryDatabase[currentCountry]) {
+                currentCountry = 'USA';
+            }
+
+            const countryData = countryDatabase[currentCountry];
+
+            // Update banner
+            document.getElementById('countryName').textContent = `Study in ${currentCountry}`;
+            document.getElementById('countryTagline').textContent = countryData.tagline;
+
+            // Update overview
+            document.getElementById('overviewContent').innerHTML = countryData.overview;
+
+            // Load colleges
+            allColleges = countryData.colleges;
+            displayColleges(allColleges);
+        }
+
+        function displayColleges(colleges) {
+            const grid = document.getElementById('collegesGrid');
+
+            if (colleges.length === 0) {
+                grid.innerHTML = '<div class="no-results" style="grid-column: 1/-1;"><p>No colleges found matching your search.</p></div>';
+                return;
+            }
+
+            grid.innerHTML = colleges.map(college => `
+                <div class="college-card" onclick="window.location.href='college-detail.html?college=${encodeURIComponent(college.name)}&country=${encodeURIComponent(currentCountry)}'">
+                    <div class="college-header">
+                        <h3>${college.name}</h3>
+                    </div>
+                    <div class="college-content">
+                        <div class="college-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${college.location}</span>
+                        </div>
+                        <div class="college-info">
+                            <i class="fas fa-book"></i>
+                            <span>${college.courses}</span>
+                        </div>
+                        <div class="college-info">
+                            <i class="fas fa-calendar"></i>
+                            <span>Intakes: ${college.intakes}</span>
+                        </div>
+                        <div class="college-info">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>${college.fees}</span>
+                        </div>
+                        <div class="college-actions">
+                            <button class="btn-primary">View Details</button>
+                            <button class="btn-secondary">Get Counselling</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterColleges() {
+            const searchTerm = document.getElementById('collegeSearch').value.toLowerCase();
+            const filtered = allColleges.filter(college =>
+                college.name.toLowerCase().includes(searchTerm) ||
+                college.location.toLowerCase().includes(searchTerm) ||
+                college.courses.toLowerCase().includes(searchTerm)
+            );
+            displayColleges(filtered);
+        }
+    </script>
+</body>
+</html>

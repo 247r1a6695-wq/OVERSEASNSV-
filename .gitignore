@@ -1,0 +1,40 @@
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# IDE
+venv/
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# OS specific
+.AppleDouble
+.LSOverride
+._*
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Node (if used in future)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python (if used in future)
+__pycache__/
+*.py[cod]
+*$py.class

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NSV Overseas Login - Student and Admin Portal">
+    <meta name="keywords" content="Login, Student Portal, Admin Panel, NSV Overseas">
+    <meta name="author" content="NSV Overseas">
+    <title>Login - NSV Overseas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background: linear-gradient(135deg, #1a365d 0%, #0f1f3a 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="login-header">
+            <div class="login-logo">
+                <img src="logo.svg" alt="NSV Overseas Logo" style="width: 60px; height: 60px; object-fit: contain;">
+            </div>
+            <h1>NSV Overseas</h1>
+            <p>Your Trusted Global Education Partner</p>
+        </div>
+
+        <!-- Tabs for Login Selection -->
+        <div class="login-tabs">
+            <button type="button" class="tab-btn active" data-tab="admin" onclick="switchLoginTab(event)">
+                <i class="fas fa-shield-alt"></i> Admin Login
+            </button>
+            <button type="button" class="tab-btn" data-tab="student" onclick="switchLoginTab(event)">
+                <i class="fas fa-user-graduate"></i> Student Login
+            </button>
+        </div>
+
+        <!-- Admin Login Form -->
+        <form id="adminLoginForm" class="login-form active" onsubmit="handleAdminLogin(event)">
+            <h2>Admin Portal</h2>
+            <p class="form-subtitle">Manage blog content and student inquiries</p>
+
+            <div class="form-group">
+                <label for="adminUsername">
+                    <i class="fas fa-user"></i> Admin Username
+                </label>
+                <input type="text" id="adminUsername" placeholder="Enter admin username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPassword">
+                    <i class="fas fa-lock"></i> Admin Password
+                </label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin: 20px 0; font-size: 1rem;">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+
+            <div class="demo-credentials">
+                <p>Demo Credentials:</p>
+                <p><strong>Username:</strong> admin</p>
+                <p><strong>Password:</strong> admin123</p>
+            </div>
+
+            <p style="text-align: center; color: rgba(255,255,255,0.8); margin-top: 20px; font-size: 0.9rem;">
+                <i class="fas fa-lock"></i> Secure admin access - credentials required
+            </p>
+        </form>
+
+        <!-- Back to Home -->
+        <a href="index.html" class="back-home-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <!-- Student Login Form -->
+        <form id="studentLoginForm" class="login-form" onsubmit="handleStudentLogin(event)">
+            <h2>Student Portal</h2>
+            <p class="form-subtitle">Browse universities, blogs, and referral programs</p>
+
+            <div class="form-group">
+                <label for="studentEmail">
+                    <i class="fas fa-envelope"></i> Email Address
+                </label>
+                <input type="email" id="studentEmail" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="studentPassword">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" id="studentPassword" placeholder="Enter your password" required>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin: 20px 0; font-size: 1rem;">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+
+            <div class="demo-credentials">
+                <p>Demo Credentials:</p>
+                <p><strong>Email:</strong> student@example.com</p>
+                <p><strong>Password:</strong> student123</p>
+            </div>
+
+            <p style="text-align: center; color: rgba(255,255,255,0.8); margin-top: 20px; font-size: 0.9rem;">
+                Don't have an account? <a href="#" style="color: #d4af37; font-weight: 600;">Create one now</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <style>
+        /* ==================== LOGIN PAGE STYLES ==================== */
+        
+        .login-container {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color), #0f1f3a);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .login-logo {
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        /* Tabs */
+        .login-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            background: var(--light-gray);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark-gray);
+            transition: all var(--transition-speed);
+            font-family: var(--font-primary);
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn.active {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .tab-btn:hover {
+            background: rgba(26, 54, 93, 0.05);
+        }
+
+        /* Forms */
+        .login-form {
+            display: none;
+            padding: 2rem 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-form.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-form h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-primary);
+        }
+
+        .form-subtitle {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-form .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-primary);
+        }
+
+        .login-form .form-group label i {
+            color: var(--secondary-color);
+        }
+
+        .login-form .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: var(--font-secondary);
+            font-size: 0.95rem;
+            transition: all var(--transition-speed);
+        }
+
+        .login-form .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+        }
+
+        .remember-forgot input {
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-speed);
+        }
+
+        .forgot-link:hover {
+            color: var(--primary-color);
+        }
+
+        .demo-credentials {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--secondary-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .demo-credentials p {
+            margin: 0.25rem 0;
+            color: var(--primary-color);
+        }
+
+        .demo-credentials strong {
+            color: var(--primary-color);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: var(--dark-gray);
+            margin-top: 1rem;
+        }
+
+        .signup-link a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home-link {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .back-home-link:hover {
+            background: rgba(26, 54, 93, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .login-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .login-form {
+                padding: 1.5rem 1rem;
+            }
+
+            .tab-btn {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab switching for login type selection
+        function switchLoginTab(event) {
+            const tabName = event.target.closest('.tab-btn').getAttribute('data-tab');
+            
+            // Remove active from all tabs and forms
+            document.querySelectorAll('.login-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
+            
+            // Add active to clicked tab and corresponding form
+            event.target.closest('.tab-btn').classList.add('active');
+            document.getElementById(tabName + 'LoginForm').classList.add('active');
+        }
+
+        // Admin Login Handler
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (login(username, password, 'admin')) {
+                setTimeout(() => {
+                    window.location.href = 'admin-panel.html';
+                }, 1500);
+            }
+        }
+
+        // Student Login Handler
+        function handleStudentLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('studentEmail').value;
+            const password = document.getElementById('studentPassword').value;
+            
+            if (login(email, password, 'student')) {
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>

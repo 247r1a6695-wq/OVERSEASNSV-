@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="College Details - University Information, Courses, Fees, and Admission Process">
+    <meta name="author" content="NSV Overseas">
+    <title>College Details - NSV Overseas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .college-detail-header {
+            background: linear-gradient(135deg, var(--primary-color), #0f1f3a);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .college-detail-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-primary);
+        }
+
+        .college-detail-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .college-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .detail-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .detail-content h2 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-primary);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .detail-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .info-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: var(--font-primary);
+        }
+
+        .info-box p {
+            color: var(--dark-gray);
+            margin: 0;
+        }
+
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .course-list li:last-child {
+            border-bottom: none;
+        }
+
+        .course-list i {
+            color: var(--secondary-color);
+        }
+
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-primary);
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            transition: all var(--transition-speed);
+            font-size: 1rem;
+        }
+
+        .cta-button.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cta-button.secondary {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .quick-info {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .quick-info-item i {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-color), #0f1f3a);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .college-detail-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-globe" style="font-size: 2rem; color: var(--primary-color);"></i>
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">NSV Overseas</h2>
+                        <p class="tagline">Your Trusted Global Education Partner</p>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="navbar-menu" id="navbarMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#courses" class="nav-link">Courses</a>
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                </nav>
+
+                <button class="btn btn-primary" onclick="openModal('counsellingModal')">Free Counselling</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- College Header -->
+    <div class="college-detail-header">
+        <h1 id="collegeName">University Name</h1>
+        <p id="collegeLocation"><i class="fas fa-map-marker-alt"></i> Location, Country</p>
+    </div>
+
+    <!-- College Details -->
+    <div class="college-detail-container">
+        <div class="detail-grid">
+            <!-- Main Content -->
+            <div class="detail-content">
+                <!-- Gallery -->
+                <div class="gallery" id="collegeGallery"></div>
+
+                <!-- Overview -->
+                <h2>About the University</h2>
+                <p id="collegeOverview">
+                    This is one of the world's leading universities known for its academic excellence and research contributions.
+                </p>
+
+                <!-- Quick Info -->
+                <div class="quick-info" id="quickInfo"></div>
+
+                <!-- Popular Courses -->
+                <h2>Popular Courses</h2>
+                <ul class="course-list" id="coursesList"></ul>
+
+                <!-- Admission Info -->
+                <h2>Admission Requirements</h2>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>IELTS Score</h4>
+                        <p>6.0 - 7.0+ (varies by program)</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Academic Qualifications</h4>
+                        <p>Bachelor's degree from recognized institution</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Experience</h4>
+                        <p>Varies by program (0-5+ years)</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Documents Required</h4>
+                        <p>Transcripts, SOP, LOR, Passport</p>
+                    </div>
+                </div>
+
+                <!-- Fee Information -->
+                <h2>Fee Structure & Scholarships</h2>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Annual Tuition Fees</h4>
+                        <p id="tuitionFee">$45,000 - $65,000</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Accommodation</h4>
+                        <p id="accommodation">$8,000 - $15,000/year</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Scholarships Available</h4>
+                        <p id="scholarships">Merit-based & Need-based</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Education Loan</h4>
+                        <p>Available through our partners</p>
+                    </div>
+                </div>
+
+                <!-- Career Opportunities -->
+                <h2>Career Opportunities</h2>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Post-Study Work Visa</h4>
+                        <p id="workVisa">2-3 years available</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Average Salary</h4>
+                        <p id="avgSalary">$60,000 - $120,000+</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Top Employers</h4>
+                        <p>Google, Microsoft, Goldman Sachs, etc.</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Career Support</h4>
+                        <p>Internships, placements, career counselling</p>
+                    </div>
+                </div>
+
+                <!-- Intake Info -->
+                <h2>Intake & Application Timeline</h2>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Intake Dates</h4>
+                        <p id="intakeDates">Jan & Sept (typically)</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Application Deadline</h4>
+                        <p id="deadline">Varies by program</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Processing Time</h4>
+                        <p>4-8 weeks typically</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Visa Processing</h4>
+                        <p>2-4 weeks after admission</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3>Take Next Step</h3>
+
+                <div class="quick-info">
+                    <div class="quick-info-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <strong>World Ranking</strong>
+                            <p id="ranking">Top 100</p>
+                        </div>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <strong>Student Population</strong>
+                            <p id="studentCount">25,000+</p>
+                        </div>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <strong>International Students</strong>
+                            <p id="intlStudents">30% - 40%</p>
+                        </div>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <strong>Program Duration</strong>
+                            <p id="duration">2 years (Master's)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="cta-button primary" onclick="openModal('counsellingModal')">
+                    <i class="fas fa-phone"></i> Get Free Counselling
+                </button>
+
+                <button class="cta-button secondary" onclick="handleApplyNow()">
+                    <i class="fas fa-paper-plane"></i> Apply Through NSV
+                </button>
+
+                <div style="background: rgba(212,175,55,0.1); padding: 1rem; border-radius: var(--border-radius); margin-top: 1.5rem;">
+                    <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0;">
+                        <i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 0.5rem;"></i>
+                        <strong>Our experts will guide you through the entire process</strong>
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 1rem; border-radius: var(--border-radius); margin-top: 1.5rem; border: 2px solid var(--border-color);">
+                    <p style="color: var(--primary-color); font-weight: 600; margin: 0 0 1rem 0;">Contact Us</p>
+                    <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0 0 0.5rem 0;">
+                        <i class="fas fa-envelope"></i> overseasnsv@gmail.com
+                    </p>
+                    <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0;">
+                        <i class="fas fa-phone"></i> 9885885847
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Counselling Modal -->
+    <div class="modal" id="counsellingModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('counsellingModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Free Counselling Session</h2>
+            <form onsubmit="handleCounsellingForm(event)">
+                <div class="form-group">
+                    <input type="text" id="counselName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="counselEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="counselPhone" placeholder="Your Phone Number" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Book Free Session</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>NSV Overseas</h4>
+                    <p>Your Trusted Global Education Partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="referral.html">Referrals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: overseasnsv@gmail.com</p>
+                    <p>Phone: 9885885847</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NSV Overseas. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCollegeDetails();
+            setupMobileMenu();
+        });
+
+        function loadCollegeDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const collegeName = params.get('college') || 'University';
+            const country = params.get('country') || 'USA';
+
+            document.getElementById('collegeName').textContent = collegeName;
+            document.getElementById('collegeLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${country}`;
+
+            // Populate gallery
+            const gallery = document.getElementById('collegeGallery');
+            gallery.innerHTML = Array(4).fill(0).map((_, i) => `
+                <div class="gallery-image">
+                    <i class="fas fa-${['building', 'book', 'users', 'graduation-cap'][i]}"></i>
+                </div>
+            `).join('');
+
+            // Populate courses
+            const courses = ['Master of Science in Computer Science', 'MBA - Business Administration', 'Master of Data Science', 'MS in Engineering'];
+            document.getElementById('coursesList').innerHTML = courses.map(course => `
+                <li><i class="fas fa-check-circle"></i> ${course}</li>
+            `).join('');
+
+            // Populate quick info
+            const quickInfoItems = [
+                { icon: 'star', label: 'World Ranking', value: 'Top 50' },
+                { icon: 'map-marker-alt', label: 'Location', value: country },
+                { icon: 'users', label: 'Student Body', value: '25,000+' },
+                { icon: 'globe', label: 'International', value: '35%' }
+            ];
+
+            document.getElementById('quickInfo').innerHTML = quickInfoItems.map(item => `
+                <div class="quick-info-item">
+                    <i class="fas fa-${item.icon}"></i>
+                    <div>
+                        <strong>${item.label}</strong>
+                        <p>${item.value}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleApplyNow() {
+            showNotification('✓ Opening application form...', 'success');
+            setTimeout(() => {
+                window.location.href = `mailto:overseasnsv@gmail.com?subject=Application Interest`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
